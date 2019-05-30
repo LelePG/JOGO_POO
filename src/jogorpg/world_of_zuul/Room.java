@@ -1,0 +1,173 @@
+package jogorpg.world_of_zuul;
+
+import jogorpg.personagens.Personagem;
+import java.util.Set;
+import java.util.HashMap;
+import java.util.Iterator;
+import jogorpg.itens.Item;
+import jogorpg.monsters.Monster;
+
+/**
+ * Class Room - a room in an adventure game.
+ *
+ * This class is part of the "World of Zuul" application. 
+ * "World of Zuul" is a very simple, text based adventure game.  
+ *
+ * A "Room" represents one location in the scenery of the game.  It is 
+ * connected to other rooms via exits.  For each existing exit, the room 
+ * stores a reference to the neighboring room.
+ * 
+ * @author  Michael Kolling and David J. Barnes
+ * @version 2008.03.30
+ */
+
+public class Room 
+{
+    private String description;
+    private HashMap<String, Room> exits; // stores exits of this room.
+    private HashMap<String,Personagem> pessoas;
+    private HashMap<String,Monster> monstros;
+    private HashMap<String,Item> itens;
+    /**
+     * Create a room described "description". Initially, it has
+     * no exits. "description" is something like "a kitchen" or
+     * "an open court yard".
+     * @param description The room's description.
+     */
+    public Room(String description) 
+    {
+        this.description = description;
+        exits = new HashMap<String, Room>();
+        pessoas = new HashMap<String,Personagem>();
+        monstros = new HashMap<String,Monster>();
+        itens = new HashMap<String,Item>();
+    }
+
+    /**
+     * Define an exit from this room.
+     * @param direction The direction of the exit.
+     * @param neighbor  The room to which the exit leads.
+     */
+    public void setExit(String direction, Room neighbor) 
+    {
+        exits.put(direction, neighbor);
+    }
+    
+    public void setPessoa(String nome, Personagem p){
+        pessoas.put(nome, p);
+    }
+
+     public void setMonstro(String nome, Monster m){
+        monstros.put(nome, m);
+     }
+     
+     public void setItem(String nome, Item i){
+         itens.put(nome, i);
+     }
+    /**
+     * @return The short description of the room
+     * (the one that was defined in the constructor).
+     */
+    public String getShortDescription()
+    {
+        return description;
+    }
+
+    /**
+     * Return a description of the room in the form:
+     *     You are in the kitchen.
+     *     Exits: north west
+     * @return A long description of this room
+     */
+    public String getLongDescription()
+    {
+        return "You are " + description + ".\n" + getExitString() + "\n" + getPessoasString() +"\n"+ getMonstrosString() +"\n"+getItensString();
+    }
+
+    /**
+     * Return a string describing the room's exits, for example
+     * "Exits: north west".
+     * @return Details of the room's exits.
+     */
+    public String getExitString()
+    {
+        String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys) {
+            returnString += " " + exit;
+        }
+        return returnString;
+    }
+    
+    public String getPessoasString(){
+        String ret = "People: ";
+        if(pessoas.isEmpty()){
+            return "You see none around.";
+        }
+        Set<String> keys = pessoas.keySet();
+        for(String pessoas: keys){
+            ret+=" " + pessoas;
+        }
+        return ret;
+    }
+
+    public String getMonstrosString(){//Pegar a classe do bicho
+        String ret = "Monsters : ";
+        if(monstros.isEmpty()){
+            return "There are no monsters around. You are safe.";
+        }
+        for(String key: monstros.keySet()){
+            ret+=" " + key +"("+")" ;
+        }
+        return ret;
+    }
+    
+    public String getItensString(){
+        String ret = "Itens: ";
+        if(itens.isEmpty()){
+            return "There are no itens here.";
+        }
+        for(String key: itens.keySet()){
+            ret+=" "+key;
+        }
+        return ret;
+    }
+    
+    public void mataMonstro(String nome){
+        if(monstros.containsKey(nome)){
+            monstros.remove(nome);
+        }
+        else{
+            System.out.println("ERROR, monster not found.");
+        }
+    }
+    public void mataPessoa(String nome){
+        if(pessoas.containsKey(nome)){
+           pessoas.remove(nome);
+        }
+        else{
+            System.out.println("ERROR, person not found");
+        }
+    }
+    
+    public void removeItem(String nome){
+        if(itens.containsKey(nome)){
+            itens.remove(nome);
+        }
+        else{
+            System.out.println("This item does not exist");
+        }
+        
+    }
+    /**
+     * Return the room that is reached if we go from this room in direction
+     * "direction". If there is no room in that direction, return null.
+     * @param direction The exit's direction.
+     * @return The room in the given direction.
+     */
+    public Room getExit(String direction) 
+    {
+        return exits.get(direction);
+    }
+}
+
