@@ -5,8 +5,6 @@
  */
 package jogorpg.personagens;
 
-import java.util.ArrayList;
-import jogorpg.itens.Item;
 
 /**
  *
@@ -14,36 +12,27 @@ import jogorpg.itens.Item;
  */
 public abstract class Personagem {
     private String nome;
-    private int força;
     private int ataque;
     private int defesa;
     private float energia;
     private float l_peso;
     private int max_energia;
     private boolean alive;
+    private boolean poison;
 
-    public Personagem(int força, int ataque, int defesa, int energia, float carregar) {
-        this.força = força;
+    public Personagem(int ataque, int defesa, int energia, float carregar) {
         this.ataque = ataque;
         this.defesa = defesa;
         this.energia = energia;
         this.l_peso = carregar;
-        this.alive = true;        
+        this.alive = true; 
+        this.poison = false;
     }
 
-    public String getNome(){
-    return this.nome;
-    }
     
-    public void setNome(String n){
-        this.nome = n;
-    }
-
-    public int getForça() {
-        return força;
-    }
-    public void setMax_energia(int i){
-        this.max_energia = i;
+    //GETTERS
+    public String getNome(){
+        return this.nome;
     }
     public int getMax_energia(){
         return this.max_energia;
@@ -56,10 +45,6 @@ public abstract class Personagem {
     public float getL_Peso(){
         return this.l_peso;
     }
-
-    public void setEnergia(float energia) {
-        this.energia = energia;
-    }
     
     public float getEnergia(){
         return this.energia;
@@ -68,7 +53,32 @@ public abstract class Personagem {
     public int getAtaque() {
         return ataque;
     }
+    
+    public boolean isPoisoned(){
+        return this.poison;
+    }
+    
+    public boolean isAlive(){
+        return this.alive;
+    }
+    //SETTERS
+    
+    public void setNome(String n){
+        this.nome = n;
+    }
 
+    public void setMax_energia(int i){
+        this.max_energia = i;
+    }
+    
+    public void setEnergia(float energia) {
+        this.energia = energia;
+    }
+    
+    public void setPoison(boolean p){
+        poison = p;
+    }
+    
     public void setAtaque(int ataque) {
         this.ataque = ataque;
         if(this.ataque>10){
@@ -86,40 +96,21 @@ public abstract class Personagem {
     public void died(){
         this.alive = false;
     }
-    public boolean isAlive(){
-        return this.alive;
-    }
-    
-    public int sorte(int m){
-        int k;
-        k= (int) (1+Math.random()*(m-1));
-        return k;
-    }
-    
-    
-    public void incremento(){
-        if(this.getEnergia()<this.getMax_energia() && this.getEnergia()>0){
-            this.energia+=(1+Math.random()*(4-1));
-        }
-        if(this.energia>this.getMax_energia()){
-            this.energia =20;
-        }
-    }
-    
+   
     public void decremento(float n){
         if(this.getEnergia()>0 && this.getEnergia()<=this.getMax_energia()){
             this.energia-=n;
-            if(this.getEnergia()<=0){
-                this.died();
+        if(this.getEnergia()<=0){
+             this.died();
             }
         }
     }
         
       public void imprimirStatus(){
-        System.out.println("# Nome: "+ this.getNome());
-        System.out.println("# Energia: "+ this.getEnergia());
-        System.out.println("# Ataque: "+this.ataque);
-        System.out.println("# Defesa: "+this.getDefesa());
+        System.out.println("# Name: "+ this.getNome());
+        System.out.println("# Energy: "+ this.getEnergia());
+        System.out.println("# Attack: "+this.ataque);
+        System.out.println("# Defence: "+this.getDefesa());
         
     
      }

@@ -5,7 +5,7 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.personagens.Charmer;
+
 import jogorpg.personagens.Personagem;
 
 /**
@@ -31,18 +31,6 @@ public class Rat extends Monster{
     @Override
     public String classe() {
         return "RAT";
-    }
-
-    @Override
-    public void follow(Personagem P) {
-         System.out.println(P.getNome() + "is trying to charm the rat.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a pet rat");
-        }
-        else{
-            P.decremento(3);
-            System.out.println("OUCH! The rat bit him");
-        }
     }
     
 }

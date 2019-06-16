@@ -19,88 +19,82 @@ public abstract class Monster {
     private int max_energia;
     private boolean alive;
     
-    public Monster(){
+    public Monster(){//Basically, a monster is just alive
         this.alive = true;
     }
 
+    //GETTERS
     public String getNome() {
         return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public int getAtaque() {
         return ataque;
     }
 
-    public void setAtaque(int ataque) {
-        this.ataque = ataque;
-    }
-
     public int getMax_energia() {
         return max_energia;
     }
-
-    public void setMax_energia(int max_energia) {
-        this.max_energia = max_energia;
-    }
-    public boolean isAlive(){
+    
+     public boolean isAlive(){
         return this.alive;
     }
    
     public int getDefesa() {
         return defesa;
     }
+   
+    public float getEnergia(){
+        return this.energia;
+    }
+    
+    
+    //SETTERS
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
+    public void setAtaque(int ataque) {
+        this.ataque = ataque;
+    }
 
+    public void setMax_energia(int max_energia) {
+        this.max_energia = max_energia;
+    }
+   
     public void setDefesa(int defesa) {
         this.defesa = defesa;
     }
 
-    public void setEnergia(int energia) {
+    public void setEnergia(int energia) {//ENERGY CANNOT BE BIGGER THEN MAX_EXERGY
         this.energia = energia;
         if(this.energia>max_energia){
             this.energia =max_energia;
         }
     }
+    public void died(){//TO BE USED WHEN A MONSTER IS KILLED
+          this.alive = false;
+      }
 
-    public int sorte(int m){
-        int k;
-        k= (int) (1+Math.random()*(m-1));
-        return k;
-    }
-    public float getEnergia(){
-        return this.energia;
-    }
-    
-    public void incremento(){
-        if(this.getEnergia()<max_energia && this.getEnergia()>0){
-            this.energia+=(1+Math.random()*(4-1));
-        }
-        if(this.energia>max_energia){
-            this.energia =max_energia;
-        }
-    }
     
     public void decremento(float n){
         if(this.getEnergia()>0 && this.getEnergia()<=max_energia ){
             this.energia= this.energia - n;
         }
+        if(this.getEnergia()<=0){
+                this.died();
+            }
     }
         
       public void imprimirStatus(){
-        System.out.println("# Nome: "+this.getNome()+" ("+this.classe()+")");
-        System.out.println("# Energia: "+ this.getEnergia());
-        System.out.println("# Ataque: "+this.ataque);
-        System.out.println("# Defesa: "+this.getDefesa());
+        System.out.println("# Name: "+this.getNome()+" ("+this.classe()+")");
+        System.out.println("# Energy: "+ this.getEnergia());
+        System.out.println("# Attack: "+this.ataque);
+        System.out.println("# Defence: "+this.getDefesa());
     
      }
-      public void died(){
-          this.alive = false;
-      }
-      
-      public abstract void attack(Personagem P);
-      public abstract String classe();
-      public abstract void follow(Personagem P);
+
+      public abstract void attack(Personagem P);//MECÂNICA DE ATAQUE DO MONSTRO
+      public abstract String classe();//RETURN ITS CLASS
+
 }

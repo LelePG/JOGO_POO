@@ -6,7 +6,6 @@
 package jogorpg.monsters;
 
 import jogorpg.monsters.Monster;
-import jogorpg.personagens.Charmer;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -31,17 +30,6 @@ public class BigScorpion extends Monster{
         else if(P.getDefesa()>=this.getAtaque()){
             P.decremento(this.getAtaque()-P.getDefesa()/2);
             this.decremento(P.getAtaque()/3);
-        }
-    }
-    @Override
-    public void follow(Personagem P){
-        System.out.println(P.getNome() + "is trying to charm the BIG scorpion.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a BIG pet Scorpion");
-        }
-        else{
-            P.decremento(6);
-            System.out.println("OUCH! The big scorpion bit him");
         }
     }
     

@@ -13,8 +13,8 @@ import jogorpg.personagens.Personagem;
  */
 public class Witch extends Personagem {
     
-    public Witch(int força, int ataque, int defesa, int energia,float carregar) {
-        super(força, ataque, defesa, energia,carregar);
+    public Witch( int ataque, int defesa, int energia,float carregar) {
+        super( ataque, defesa, energia,carregar);
         this.setNome("Whela");
     }
     

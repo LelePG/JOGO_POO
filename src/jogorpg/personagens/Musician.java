@@ -11,8 +11,8 @@ package jogorpg.personagens;
  */
 public class Musician extends Personagem{
     
-    public Musician( int força, int ataque, int defesa, int energia,float carregar) {
-        super(força, ataque, defesa, energia,carregar);
+    public Musician( int ataque, int defesa, int energia,float carregar) {
+        super( ataque, defesa, energia,carregar);
         this.setNome("Mark");
     }
     

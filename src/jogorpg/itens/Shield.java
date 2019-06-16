@@ -9,15 +9,10 @@ package jogorpg.itens;
  *
  * @author lele
  */
-public class Sword extends Item{
-
-    public Sword(String nome, int p, int da, int def) {
-        super(nome, p, da, def);
-    }
+public class Shield extends Item{
     
-    //METHOD FOR SHAPENING THE SWORD
-    public void amolar(){
-        this.setDamage(this.getDamage()+1);
+    public Shield(String nome, int p, int da, int def) {
+        super(nome, p, da, def);
     }
     
 }

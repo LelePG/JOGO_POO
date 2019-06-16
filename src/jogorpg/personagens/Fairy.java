@@ -11,8 +11,8 @@ package jogorpg.personagens;
  */
 public class Fairy extends Personagem{
     
-    public Fairy(int força, int ataque, int defesa, int energia,float carregar) {
-        super(força, ataque, defesa, energia,carregar);
+    public Fairy( int ataque, int defesa, int energia,float carregar) {
+        super( ataque, defesa, energia,carregar);
         this.setNome("Iadala");
     }
     

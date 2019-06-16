@@ -5,7 +5,6 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.personagens.Charmer;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -30,17 +29,6 @@ public class Bat extends Monster{
             P.decremento(this.getAtaque()+1);
             this.decremento(1);
          }
-    }
-    @Override
-    public void follow(Personagem P){
-        System.out.println(P.getNome() + "is trying to charm the bat.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a pet Bat");
-        }
-        else{
-            System.out.println("OUCH! The bat bit him");
-            P.decremento(3);
-        }
     }
     @Override
     public String classe(){

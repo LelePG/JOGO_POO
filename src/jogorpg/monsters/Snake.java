@@ -5,18 +5,16 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.monsters.Monster;
-import jogorpg.personagens.Charmer;
 import jogorpg.personagens.Personagem;
 
 /**
  *
  * @author lele
  */
-public class Snakes extends Monster {
+public class Snake extends Monster {
     private boolean poison;
    
-    public Snakes(String nome, boolean p){
+    public Snake(String nome, boolean p){
         this.setNome(nome);
         this.poison = p;
         this.setMax_energia(7);
@@ -42,20 +40,11 @@ public class Snakes extends Monster {
             P.decremento(5);
             this.decremento(1);
         }
-        //adicionar envenenamento
-    }
-    @Override
-    public void follow(Personagem P){
-        System.out.println(P.getNome() + "is trying to charm the snake.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a pet Snake");
-        }
-        else{
-            P.decremento(5);
-            System.out.println("OUCH! The snake bit him");
+        if(this.poison && this.getEnergia()<2 && !P.isPoisoned()){
+            P.setPoison(true);
+            System.out.println("YOU ARE POISONED");
         }
     }
-     
     @Override
     public String classe(){
         return "SNAKE";

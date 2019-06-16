@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jogorpg.world_of_zuul;
+package jogorpg.itens;
 
 /**
  *
- * @author aluno
+ * @author lele
  */
-class Snake {
+public class MagicWard extends Item{
+    
+    public MagicWard(String nome, int p, int da, int def) {
+        super(nome, p, da, def);
+    }
     
 }

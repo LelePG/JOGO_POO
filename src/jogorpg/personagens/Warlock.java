@@ -13,8 +13,8 @@ import jogorpg.personagens.Personagem;
  */
 public class Warlock extends Personagem{
     
-    public Warlock(int força, int ataque, int defesa, int energia,float carregar) {
-        super(força, ataque, defesa, energia,carregar);
+    public Warlock( int ataque, int defesa, int energia,float carregar) {
+        super( ataque, defesa, energia,carregar);
         this.setNome("Devon");
     }
     

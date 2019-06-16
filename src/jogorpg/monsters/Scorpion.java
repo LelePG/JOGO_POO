@@ -6,7 +6,6 @@
 package jogorpg.monsters;
 
 import jogorpg.monsters.Monster;
-import jogorpg.personagens.Charmer;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -14,13 +13,14 @@ import jogorpg.personagens.Personagem;
  * @author lele
  */
 public class Scorpion extends Monster{
-   
-    public Scorpion(String nome){
+   private boolean poison;
+    public Scorpion(String nome, boolean p){
         this.setNome(nome);
         this.setAtaque(6);
         this.setDefesa(4);
         this.setMax_energia(6);
         this.setEnergia(4);
+        this.poison = p;
     }
     @Override
     public void attack(Personagem P){
@@ -32,20 +32,12 @@ public class Scorpion extends Monster{
             P.decremento(this.getAtaque()- P.getDefesa());
             this.decremento(this.getAtaque()/2);
         }
+        if(this.poison && this.getEnergia()<5 && !P.isPoisoned()){
+            P.setPoison(true);
+            System.out.println("YOU ARE POISONED");
+        }
 
     }
-    @Override
-    public void follow(Personagem P){
-        System.out.println(P.getNome() + "is trying to charm the scorpion.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a pet Scorpion");
-        }
-        else{
-            P.decremento(6);
-            System.out.println("OUCH! The scorpion bit him");
-        }
-    }
-    
     @Override
     public String classe(){
         return "SCORPION";

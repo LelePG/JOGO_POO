@@ -5,8 +5,6 @@
  */
 package jogorpg.itens;
 
-import jogorpg.personagens.Personagem;
-
 /**
  *
  * @author lele
@@ -17,7 +15,13 @@ public abstract class Item {
     private int defesa;
     private String nome;
 
-    
+/**
+ * 
+ * @param nome Item's name
+ * @param p Item's weitgh
+ * @param da Item's damage
+ * @param def Item's defence
+ */    
     public Item(String nome,int p, int da, int def){
         this.nome = nome;
         this.peso = p;
@@ -25,6 +29,7 @@ public abstract class Item {
         this.defesa = def;
     }
     
+    //GETTERS
     public int getPeso(){
         return this.peso;
     }
@@ -41,7 +46,13 @@ public abstract class Item {
         return this.nome;
     }
     
-    public abstract void UseItem();
-    public abstract void FixItem(Personagem p);
     
+    //SETTERS
+    public void setDamage(int i){
+        this.damage = i;
+    }
+    
+    public void setDefesa(int i){
+        this.defesa = i;
+    }
 }

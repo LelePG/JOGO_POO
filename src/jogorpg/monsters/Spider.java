@@ -5,8 +5,6 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.monsters.Monster;
-import jogorpg.personagens.Charmer;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -40,17 +38,10 @@ public class Spider extends Monster{
         else if(P.getDefesa()<=this.getAtaque()){
             P.decremento(this.getAtaque()/3);
             this.decremento(P.getAtaque()/this.getAtaque());
-         }
-    }
-    @Override
-    public void follow(Personagem P){
-        System.out.println(P.getNome() + "is trying to charm the spider.");
-        if(P instanceof Charmer){
-        System.out.println("Now you have a pet spider");
         }
-        else{
-            System.out.println("OUCH! The spider bit him");
-            P.decremento(3);
+        if(this.poison && this.getEnergia()<5 && !P.isPoisoned()){
+            P.setPoison(true);
+            System.out.println("YOU ARE POISONED");
         }
     }
     @Override
