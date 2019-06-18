@@ -149,6 +149,15 @@ public class Room
             System.out.println("ERROR, person not found");
         }
     }
+    
+    public Personagem getPessoa(String nome){
+        if(pessoas.containsKey(nome)){
+           return pessoas.get(nome);
+        }
+        else{
+            return null;
+        }
+    }
     //END PERSON RELATED
     
     //MONSTER RELATED
@@ -177,8 +186,6 @@ public class Room
     }
      
      public Monster getMonstro(String nome){//DEVERIA RETORNAR O MONSTRO COM O QUAL EU QUERO LUTAR, MAS POR ALGUM MOTIVO SEMPRE RETORNA NULL PRA MAIN
-        System.out.println("nome: "+nome);
-        System.out.println(monstros.containsKey(nome));
         if(monstros.containsKey(nome)){
            return monstros.get(nome);
         }
@@ -187,6 +194,9 @@ public class Room
         }
         
     }
+     public boolean sairSala(){
+         return monstros.isEmpty();
+     }
     //END MONSTER RELATED
      
     //ITEM RELATED
@@ -206,9 +216,7 @@ public class Room
         return ret;
     }
     
-    public Item getItem(String nome){//DEVERIA RETORNAR O ITEM QUE EU QUERO PEGAR
-         System.out.println("nome: "+nome);
-         System.out.println(itens.containsKey(nome));
+    public Item getItem(String nome){//DEVERIA RETORNAR O ITEM QUE EU QUERO PEGA
         if(itens.containsKey(nome)){
            return itens.get(nome);
         }

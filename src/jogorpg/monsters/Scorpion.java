@@ -6,6 +6,7 @@
 package jogorpg.monsters;
 
 import jogorpg.monsters.Monster;
+import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -18,12 +19,13 @@ public class Scorpion extends Monster{
         this.setNome(nome);
         this.setAtaque(6);
         this.setDefesa(4);
-        this.setMax_energia(6);
-        this.setEnergia(4);
+        this.setMax_energia(10);
+        this.setEnergia(10);
+        this.setMoedas(70);
         this.poison = p;
     }
     @Override
-    public void attack(Personagem P){
+    public void attack(Fighting_Character P) {
         if(P.getAtaque()>this.getAtaque()){
             P.decremento(this.getAtaque()/3);
             this.decremento(P.getAtaque()/2);

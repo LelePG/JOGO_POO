@@ -5,6 +5,7 @@
  */
 package jogorpg.monsters;
 
+import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -18,6 +19,7 @@ public class Spider extends Monster{
         this.setMax_energia(13);
         this.setEnergia(13);
         this.poison = p;
+        this.setMoedas(100);
         if(this.poison){
             this.setAtaque(7);
             this.setDefesa(4);
@@ -30,7 +32,7 @@ public class Spider extends Monster{
         
     }
     @Override
-    public void attack(Personagem P){
+    public void attack(Fighting_Character P) {
         if(P.getDefesa()>this.getAtaque()){
             P.decremento(this.getAtaque());
             this.decremento(this.getDefesa()/2);

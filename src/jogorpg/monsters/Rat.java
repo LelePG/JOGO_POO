@@ -6,6 +6,7 @@
 package jogorpg.monsters;
 
 
+import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -20,10 +21,11 @@ public class Rat extends Monster{
         this.setDefesa(3);
         this.setMax_energia(6);
         this.setEnergia(6);
+        this.setMoedas(30);
     }
 
     @Override
-    public void attack(Personagem P) {
+    public void attack(Fighting_Character P) {
         P.decremento(this.getAtaque());
         this.decremento(P.getAtaque()/2);
     }

@@ -5,24 +5,27 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.monsters.Monster;
+
+import jogorpg.itens.*;
+import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
 /**
  *
  * @author lele
  */
-public class BigScorpion extends Monster{
-   
-    public BigScorpion(String nome){
+public class BossScorpion extends BossMonster{
+   private Item i;
+    public BossScorpion(String nome){
         this.setNome(nome);
-        this.setAtaque(7);
-        this.setDefesa(6);
-        this.setMax_energia(20);
-        this.setEnergia(20);
+        this.setAtaque(17);
+        this.setDefesa(16);
+        this.setMax_energia(25);
+        this.setEnergia(25);
+        i = new Weapon ("Sword of Raal",4,"A strong sword forged in the moutain of Raal",15,5,25);
     }
     @Override
-    public void attack(Personagem P){
+    public void attack(Fighting_Character P) {
         if(P.getDefesa()<this.getAtaque()){
             P.decremento(this.getAtaque()/2);
             this.decremento(10-this.getAtaque());
@@ -35,7 +38,7 @@ public class BigScorpion extends Monster{
     
     @Override
     public String classe(){
-        return "BIG SCORPION";
+        return "BOSS SCORPION";
     }
         
    

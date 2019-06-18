@@ -1,21 +1,14 @@
 ----------------------------------
-lele has entered the dungeon.
+lele started to play.
 ----------------------------------
 ----------------------------------
-lele entered Jail.
+lele entered The Cave.
 ----------------------------------
-lele entered Library.
-lele is figthing snake1.
-lele is figthing snake1.
-lele killed snake1.
-lele is figthing spider3.
-lele is figthing spider3.
-lele is figthing spider3.
-lele is figthing spider3.
-lele is figthing spider3.
-lele is figthing spider3.
-lele is figthing spider3.
-lele killed spider3.
+lele entered Long Stone Corridor.
+lele is figthing Rat1.
+lele is figthing Rat1.
+lele is figthing Rat1.
+lele killed Rat1.
 ----------------------------------
-You Died. Game over
+lele quitted the game.
 ----------------------------------

@@ -7,6 +7,7 @@ package jogorpg.personagens;
 
 import java.util.HashMap;
 import jogorpg.itens.Item;
+import jogorpg.itens.Weapon;
 import jogorpg.monsters.Monster;
 
 
@@ -14,8 +15,9 @@ import jogorpg.monsters.Monster;
  *
  * @author lele
  */
-public class Hero extends Personagem{
+public class Hero extends Fighting_Character{
     private HashMap<String,Item> inventario;
+    private int moedas = 0;
     
     public Hero( int ataque, int defesa, int energia,float carregar) {
         super( ataque, defesa, energia,carregar);
@@ -30,11 +32,8 @@ public class Hero extends Personagem{
             return;
         }
         else{
-            inventario.put(i.getNome(),i);
-           // modificadores de ataque e defesa
-            this.setAtaque(this.getAtaque() + i.getDamage()/3);
-            this.setDefesa(this.getDefesa() + i.getDefesa()/3);
-            System.out.println(i.getNome()+" increased "+this.getNome()+" attack and defense.");
+            inventario.put(i.getNome(),i); 
+            this.incrementaStatus((Weapon)i);
         }
     }
     
@@ -43,9 +42,9 @@ public class Hero extends Personagem{
         if(inventario.containsKey(nome)){
             aux = inventario.get(nome);
             inventario.remove(nome);
-            this.setAtaque(this.getAtaque() - aux.getDamage()/3);//o que ele ganha quando pega o item, tem que diminuir quando deixa o item
-            this.setDefesa(this.getDefesa() - aux.getDefesa()/3);
-            System.out.println("Dropping "+aux.getNome()+" decreased "+this.getNome()+" attack and defense.");
+            if(aux instanceof Weapon){
+                this.decrementaStatus((Weapon)aux);
+            }
             return aux;
         }
         else{
@@ -55,6 +54,16 @@ public class Hero extends Personagem{
         
     }
     
+    
+    private void decrementaStatus(Weapon w){
+        this.setAtaque(this.getAtaque() - w.getDamage()/2);
+        this.setDefesa(this.getDefesa() - w.getDefense()/2);
+    }
+
+    private void incrementaStatus(Weapon w){
+        this.setAtaque(this.getAtaque() + w.getDamage()/2);
+        this.setDefesa(this.getDefesa() + w.getDefense()/2);
+    }
     public String getInventarioString(){
         String ret = "Inventory: ";
         if(inventario.isEmpty()){
@@ -94,5 +103,10 @@ public class Hero extends Personagem{
        M.imprimirStatus();
        System.out.println("#################");
       }  
+
+    @Override
+    public void talk() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

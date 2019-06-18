@@ -5,28 +5,26 @@
  */
 package jogorpg.itens;
 
+import jogorpg.personagens.*;
+
 /**
  *
  * @author lele
  */
 public abstract class Item {
     private int peso;
-    private int damage;
-    private int defesa;
     private String nome;
-
+    private String description;
+    private boolean destroy;//se o item precisa ser destruido depois do uso.
 /**
  * 
  * @param nome Item's name
- * @param p Item's weitgh
- * @param da Item's damage
- * @param def Item's defence
+ * @param peso Item's weitgh
  */    
-    public Item(String nome,int p, int da, int def){
+    public Item(String nome,int peso, String description){
         this.nome = nome;
-        this.peso = p;
-        this.damage = da;
-        this.defesa = def;
+        this.peso = peso;
+        this.description = description;
     }
     
     //GETTERS
@@ -34,25 +32,20 @@ public abstract class Item {
         return this.peso;
     }
     
-    public int getDamage(){
-        return this.damage;
-    }
-    
-    public int getDefesa(){
-        return this.defesa;
-    }
-    
     public String getNome(){
         return this.nome;
     }
     
-    
-    //SETTERS
-    public void setDamage(int i){
-        this.damage = i;
+    public boolean getDestroy(){
+        return this.destroy;
     }
+    //setter
+    public void setDestroy(boolean d){
+        this.destroy = d;
+    }
+    public abstract void use(Fighting_Character F);
     
-    public void setDefesa(int i){
-        this.defesa = i;
+    public String getDescription(){
+        return this.getNome() +": "+this.description;
     }
 }

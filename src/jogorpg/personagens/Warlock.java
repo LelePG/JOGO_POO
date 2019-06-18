@@ -13,17 +13,16 @@ import jogorpg.personagens.Personagem;
  */
 public class Warlock extends Personagem{
     
-    public Warlock( int ataque, int defesa, int energia,float carregar) {
-        super( ataque, defesa, energia,carregar);
+    public Warlock( float carregar) {
+        super( carregar);
         this.setNome("Devon");
     }
-    
-    public void heal(Personagem P){
-        P.setEnergia(P.getEnergia()+2);
-        this.setEnergia(this.getEnergia()-1);
-        if(this.getEnergia()<=0){
-            System.out.println("Devon's dead");
-        }
+
+    @Override
+    public void talk() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    
     
 }

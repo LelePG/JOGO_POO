@@ -13,9 +13,14 @@ import jogorpg.personagens.Personagem;
  */
 public class Witch extends Personagem {
     
-    public Witch( int ataque, int defesa, int energia,float carregar) {
-        super( ataque, defesa, energia,carregar);
+    public Witch( float carregar) {
+        super( carregar);
         this.setNome("Whela");
+    }
+
+    @Override
+    public void talk() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

@@ -5,7 +5,7 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.*;
 
 /**
  *
@@ -18,6 +18,7 @@ public abstract class Monster {
     private float energia;
     private int max_energia;
     private boolean alive;
+    private int moedas;
     
     public Monster(){//Basically, a monster is just alive
         this.alive = true;
@@ -48,6 +49,10 @@ public abstract class Monster {
         return this.energia;
     }
     
+    public int getMoedas(){
+        return this.moedas;
+    }
+    
     
     //SETTERS
     public void setNome(String nome) {
@@ -74,7 +79,11 @@ public abstract class Monster {
     }
     public void died(){//TO BE USED WHEN A MONSTER IS KILLED
           this.alive = false;
-      }
+    }
+    
+    public void setMoedas(int m){
+        this.moedas = m;
+    }
 
     
     public void decremento(float n){
@@ -94,7 +103,7 @@ public abstract class Monster {
     
      }
 
-      public abstract void attack(Personagem P);//MECÂNICA DE ATAQUE DO MONSTRO
+      public abstract void attack(Fighting_Character P);//MECÂNICA DE ATAQUE DO MONSTRO
       public abstract String classe();//RETURN ITS CLASS
 
 }

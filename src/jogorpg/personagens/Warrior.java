@@ -13,9 +13,14 @@ import jogorpg.personagens.Personagem;
  */
 public class Warrior extends Personagem{
     
-    public Warrior( int ataque, int defesa, int energia,float carregar) {
-        super( ataque, defesa, energia,carregar);
+    public Warrior( float carregar) {
+        super( carregar);
         this.setNome("Winslow");
+    }
+
+    @Override
+    public void talk() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

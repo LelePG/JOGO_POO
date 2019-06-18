@@ -5,26 +5,29 @@
  */
 package jogorpg.monsters;
 
-
-import jogorpg.personagens.Personagem;
+import jogorpg.itens.*;
+import jogorpg.personagens.*;
 
 /**
  *
  * @author lele
  */
-public class BigSnake extends Monster{
- 
-   
-    public BigSnake(String nome){
+public class BossSpider extends BossMonster{
+    private String nome;
+    private boolean poison;
+    private Item i;
+    public BossSpider(String nome){
         this.setNome(nome);
-        this.setAtaque(8);
-        this.setDefesa(6);
-        this.setMax_energia(17);
-        this.setEnergia(17);
+        this.setAtaque(12);
+        this.setDefesa(12);
+        this.setMax_energia(20);
+        this.setEnergia(20);
+        this.poison = true;
+        i = new Key("Iron Key",3,"The key used to open the Iron Gate");
     }
     
     @Override
-    public void attack(Personagem P){
+    public void attack(Fighting_Character P) {
         if(P.getDefesa()>this.getAtaque()){
             P.decremento(this.getAtaque()/2);
             this.decremento(P.getDefesa()- this.getAtaque());
@@ -36,13 +39,10 @@ public class BigSnake extends Monster{
     }
     @Override
     public String classe(){
-        return "BIG SNAKE";
+        return "BOSS SPIDER";
     }
-   
     
     
-   
+    
     
 }
-
-

@@ -12,16 +12,15 @@ import jogorpg.monsters.Monster;
  */
 public class Silent extends Personagem{
     
-    public Silent( int ataque, int defesa, int energia,float carregar) {
-        super( ataque, defesa, energia,carregar);
+    public Silent( float carregar) {
+        super(carregar);
         this.setNome("Odrian");
     }
-    
-    public void killMonster(Monster M){
-        M.setEnergia(-30);
-        this.setEnergia(this.getEnergia()-13);
-        if(this.getEnergia()<=0){
-            System.out.println("Odrian's dead");
-        }
+
+    @Override
+    public void talk() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+   
 }

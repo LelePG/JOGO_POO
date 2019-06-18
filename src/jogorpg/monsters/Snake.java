@@ -5,6 +5,7 @@
  */
 package jogorpg.monsters;
 
+import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
 /**
@@ -22,15 +23,17 @@ public class Snake extends Monster {
         if(this.poison){
             this.setAtaque(5);
             this.setDefesa(2);
+            this.setMoedas(20);
         }
         else{
             this.setAtaque(3);
             this.setDefesa(3); 
+            this.setMoedas(20);
         }
         
     }
     @Override
-    public void attack(Personagem P){
+    public void attack(Fighting_Character P) {
         if(P.getDefesa()>this.getAtaque()){
             P.decremento(this.getAtaque()/4);
            this.decremento(P.getAtaque()/2);

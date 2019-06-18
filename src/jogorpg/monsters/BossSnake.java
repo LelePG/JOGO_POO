@@ -5,6 +5,8 @@
  */
 package jogorpg.monsters;
 
+
+import jogorpg.itens.*;
 import jogorpg.personagens.Fighting_Character;
 import jogorpg.personagens.Personagem;
 
@@ -12,29 +14,38 @@ import jogorpg.personagens.Personagem;
  *
  * @author lele
  */
-public class Bat extends Monster{
- public Bat(String nome){
+public class BossSnake extends BossMonster{
+    private Item i;
+   
+    public BossSnake(String nome){
         this.setNome(nome);
-        this.setAtaque(5);
-        this.setDefesa(4);
-        this.setMax_energia(10);
-        this.setEnergia(10);
-        this.setMoedas(2);
+        this.setAtaque(18);
+        this.setDefesa(16);
+        this.setMax_energia(25);
+        this.setEnergia(25);
+        i = new Weapon("Dark-Shield",2,"A Dark Iron Shield.",0,4,20);
     }
-    @Override
-    public String classe(){
-        return "BAT";
-    }
-
+    
     @Override
     public void attack(Fighting_Character P) {
         if(P.getDefesa()>this.getAtaque()){
             P.decremento(this.getAtaque()/2);
-            this.decremento(P.getAtaque()/3);
+            this.decremento(P.getDefesa()- this.getAtaque());
         }
         else if(P.getDefesa()<=this.getAtaque()){
-            P.decremento(this.getAtaque()+1);
-            this.decremento(1);
-         }
+            P.decremento(3);
+            this.decremento(2);
+        }
     }
+    @Override
+    public String classe(){
+        return "BOSS SNAKE";
+    }
+   
+    
+    
+   
+    
 }
+
+

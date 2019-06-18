@@ -3,22 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jogorpg.personagens;
+package jogorpg.itens;
+
+import jogorpg.personagens.Fighting_Character;
+import jogorpg.personagens.Personagem;
 
 /**
  *
  * @author lele
  */
-public class Musician extends Personagem{
+public class Key extends Item {
     
-    public Musician(float carregar) {
-        super(carregar);
-        this.setNome("Mark");
+    public Key(String nome, int peso, String descrip) {
+        super(nome, peso,descrip);
     }
 
     @Override
-    public void talk() {
+    public void use(Fighting_Character F) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
     
 }
