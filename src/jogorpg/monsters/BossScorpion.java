@@ -22,7 +22,7 @@ public class BossScorpion extends BossMonster{
         this.setDefesa(16);
         this.setMax_energia(25);
         this.setEnergia(25);
-        i = new Weapon ("Sword of Raal",4,"A strong sword forged in the moutain of Raal",15,5,25);
+        i = new Attack_Weapon ("Sword of Raal",4,"A strong sword forged in the moutain of Raal",15,5,25);
     }
     @Override
     public void attack(Fighting_Character P) {

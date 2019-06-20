@@ -18,13 +18,21 @@ public class Poison_Potion extends Potion{
         super(nome, peso, description, qualidade);
     }
 
-  
+   @Override
+    public String getPotionType() {
+        return "Antidote";
+    }
 
     @Override
     public void use(Fighting_Character F) {
         if(F.isPoisoned() && this.getQualidade()>=0){
             F.setPoison(false);
         }
+    }
+
+    @Override
+    public String getPrintLine() {
+        return "was cured from poison.";
     }
     
 }

@@ -5,7 +5,10 @@
  */
 package jogorpg.personagens;
 
-import jogorpg.personagens.Personagem;
+
+import java.io.*;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 /**
  *
@@ -13,10 +16,7 @@ import jogorpg.personagens.Personagem;
  */
 public class Witch extends Personagem {
     
-    public Witch( float carregar) {
-        super( carregar);
-        this.setNome("Whela");
-    }
+   
 
     @Override
     public void talk() {

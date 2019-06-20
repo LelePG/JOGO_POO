@@ -12,8 +12,8 @@ import jogorpg.personagens.Personagem;
  *
  * @author lele
  */
-public class Strengh_Potion extends Potion {
-    public Strengh_Potion(String nome, int peso, String description, int qualidade) {
+public class Strength_Potion extends Potion {
+    public Strength_Potion(String nome, int peso, String description, int qualidade) {
         super(nome, peso, description, qualidade);
         this.setQualidade(qualidade);
     }
@@ -21,6 +21,16 @@ public class Strengh_Potion extends Potion {
     @Override
     public void use(Fighting_Character F) {
          F.setAtaque(F.getAtaque()*this.getQualidade());
+    }
+
+    @Override
+    public String getPotionType() {
+        return "Strength Potion";
+    }
+
+    @Override
+    public String getPrintLine() {
+        return"'s strength has Increased";
     }
     
     

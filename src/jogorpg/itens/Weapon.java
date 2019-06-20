@@ -12,7 +12,7 @@ import jogorpg.personagens.Personagem;
  *
  * @author lele
  */
-public class Weapon extends Item{
+public abstract class Weapon extends Item{
     private int damage;
     private int defence;
     private int durabilidade;
@@ -41,17 +41,7 @@ public class Weapon extends Item{
         this.durabilidade = d;
     }
 
-    @Override
-     public void use(Fighting_Character F){
-        this.setDurabilidade(this.getDurabilidade()-1);
-        if(this.getDurabilidade()<=0){
-            this.setDestroy(true);
-        }
-    }
-
-     public void addModificador(Fighting_Character F){
-          F.setAtaque(F.getAtaque() + this.getDamage()/2);
-          F.setDefesa(F.getDefesa() + this.getDefense()/2);
-          System.out.println(this.getNome()+" increased "+F.getNome()+" attack and defense.");
-     }
+    public abstract String getPrintLine();
+    public abstract void use(Fighting_Character F);
+   
 }

@@ -4,23 +4,22 @@
  * and open the template in the editor.
  */
 package jogorpg.personagens;
-import jogorpg.monsters.Monster;
 
+import java.io.*;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 /**
  *
  * @author lele
  */
-public class Silent extends Personagem{
+public class TalkingStatue extends Personagem {
+
+   
     
-    public Silent( float carregar) {
-        super(carregar);
-        this.setNome("Odrian");
-    }
 
     @Override
     public void talk() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-   
 }

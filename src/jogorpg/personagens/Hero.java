@@ -6,9 +6,8 @@
 package jogorpg.personagens;
 
 import java.util.HashMap;
-import jogorpg.itens.Item;
-import jogorpg.itens.Weapon;
-import jogorpg.monsters.Monster;
+import jogorpg.itens.*;
+import jogorpg.monsters.*;
 
 
 /**
@@ -17,57 +16,58 @@ import jogorpg.monsters.Monster;
  */
 public class Hero extends Fighting_Character{
     private HashMap<String,Item> inventario;
-    private int moedas = 0;
+    private Coins moedas;
+    private Attack_Weapon Attack_Weapon;
+    private Defense_Weapon Shield;
     
     public Hero( int ataque, int defesa, int energia,float carregar) {
         super( ataque, defesa, energia,carregar);
         this.setMax_energia(35);
+        moedas = new Coins("Coins1",1,"golden coins",100);
         inventario = new HashMap<String,Item>();
+        this.pickItem(moedas);
+        this.Attack_Weapon = null;
+        this.Shield = null;
     }
     
+    public Weapon getAttackWeapon(){
+        return this.Attack_Weapon;
+        
+    }
     
-    public void pickItem(Item i){
+    public Weapon getDefenseWeapon(){
+        return this.Shield;
+    }
+    
+    public boolean pickItem(Item i){
         if(i.getPeso()+this.pesoInventario()>this.getL_Peso()){
             System.out.println("You can't carry this. It's too heavy for you.");
-            return;
+            return false;
         }
-        else{
-            inventario.put(i.getNome(),i); 
-            this.incrementaStatus((Weapon)i);
-        }
+        inventario.put(i.getNome(),i); 
+        return true;
     }
+    
+    
     
     public Item removerItem(String nome){
         Item aux;
         if(inventario.containsKey(nome)){
             aux = inventario.get(nome);
             inventario.remove(nome);
-            if(aux instanceof Weapon){
-                this.decrementaStatus((Weapon)aux);
-            }
             return aux;
         }
         else{
-           // System.out.println("You do not have this item.");
+           //Trato isso na Game System.out.println("You do not have this item.");
             return null;
         }
         
     }
     
-    
-    private void decrementaStatus(Weapon w){
-        this.setAtaque(this.getAtaque() - w.getDamage()/2);
-        this.setDefesa(this.getDefesa() - w.getDefense()/2);
-    }
-
-    private void incrementaStatus(Weapon w){
-        this.setAtaque(this.getAtaque() + w.getDamage()/2);
-        this.setDefesa(this.getDefesa() + w.getDefense()/2);
-    }
     public String getInventarioString(){
         String ret = "Inventory: ";
         if(inventario.isEmpty()){
-            return "Your iventory is empty. ";
+            return "Your inventory is empty. ";
         }
         for(String key: inventario.keySet()){
             ret+=" "+key;
@@ -103,10 +103,44 @@ public class Hero extends Fighting_Character{
        M.imprimirStatus();
        System.out.println("#################");
       }  
-
+    
+    public void equipAttackWeapon(Attack_Weapon w){
+        this.Attack_Weapon = w;
+        w.addModificador(this);
+    }
+    
+    public Weapon unequipAttackWeapon(){
+        this.Attack_Weapon.removeModificador(this);
+        Weapon aux = this.Attack_Weapon;
+        this.Attack_Weapon = null;
+        return aux;
+    }
+    
+    public void equipShield(Defense_Weapon w){
+        this.Shield = w;
+        w.addModificador(this);
+    }
+    
+    public Weapon unequipShield(){
+        Weapon aux = this.Shield;
+       this.Shield.removeModificador(this);
+        this.Shield = null;
+        return aux;
+    }
+    
+    public void displayInventory(){
+        if(inventario.isEmpty()){
+            System.out.println("Your inventory is empty.");
+            return;
+        }
+        inventario.forEach((k,v)->{
+        System.out.println(v.getDescription()); });
+       
+        
+    }
     @Override
     public void talk() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("I must find Ilea.");
     }
     
 }

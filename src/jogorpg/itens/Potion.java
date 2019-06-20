@@ -40,6 +40,8 @@ public abstract class Potion extends Item {
         return super.getDescription() + ", quality : "+this.getQualidade();
     }
     
+    public abstract String getPotionType();
+    
     public abstract void use(Fighting_Character F);
     
 }

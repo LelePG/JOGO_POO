@@ -14,8 +14,7 @@ import java.util.Scanner;
 public class Fairy extends Personagem{
     private File Fairy_Lines;
     Scanner scanner;
-    public Fairy(float carregar,String nome) {
-        super(carregar);
+    public Fairy(String nome) {
         this.setNome(nome);
         Fairy_Lines = new File("Fairy_Lines.txt");
         scanner =null;
@@ -23,13 +22,12 @@ public class Fairy extends Personagem{
             scanner = new Scanner(Fairy_Lines);
             
         }catch(FileNotFoundException e){
-            System.out.println("mm");
+            System.out.println("Cannot talk to "+this.getNome());
         }
     }
     
     @Override
     public void talk(){
-        
         try{
         String line = scanner.nextLine();
         
@@ -37,11 +35,11 @@ public class Fairy extends Personagem{
             System.out.println(line);
             line = scanner.nextLine();
             if(!scanner.hasNext()){
-            System.out.println("You can leave me now, dear. It's an order.");
+            System.out.println("I've told you all I know. Go away now.");
             }
         }    
         }catch (NoSuchElementException e){
-             System.out.println("You can leave me now, dear. It's an order.");
+             System.out.println("I've told you all I know. Go away now.");
          }   
                 
     }

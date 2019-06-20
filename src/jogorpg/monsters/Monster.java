@@ -5,6 +5,7 @@
  */
 package jogorpg.monsters;
 
+import jogorpg.itens.*;
 import jogorpg.personagens.*;
 
 /**
@@ -18,10 +19,11 @@ public abstract class Monster {
     private float energia;
     private int max_energia;
     private boolean alive;
-    private int moedas;
+    private Coins moedas;
     
     public Monster(){//Basically, a monster is just alive
         this.alive = true;
+        moedas = new Coins("Coins",1,"golden coins",0);
     }
 
     //GETTERS
@@ -50,7 +52,7 @@ public abstract class Monster {
     }
     
     public int getMoedas(){
-        return this.moedas;
+        return moedas.getCoinNumber();
     }
     
     
@@ -81,10 +83,13 @@ public abstract class Monster {
           this.alive = false;
     }
     
-    public void setMoedas(int m){
-        this.moedas = m;
+    public void setMoedas(int i){
+        moedas.setCoinNumber(i);
     }
 
+    public Item dropCoins(){
+        return this.moedas;
+    }
     
     public void decremento(float n){
         if(this.getEnergia()>0 && this.getEnergia()<=max_energia ){

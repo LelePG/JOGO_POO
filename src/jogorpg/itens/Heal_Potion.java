@@ -17,10 +17,19 @@ public class Heal_Potion extends Potion {
         this.setQualidade(qualidade);
     }
 
+     @Override
+    public String getPotionType() {
+        return "Healing Potion";
+    }
 
     @Override
     public void use(Fighting_Character F) {
        F.setEnergia(F.getEnergia()+4*this.getQualidade());
+    }
+
+    @Override
+    public String getPrintLine() {
+       return this.getNome()+" restored some energy.";
     }
 
     

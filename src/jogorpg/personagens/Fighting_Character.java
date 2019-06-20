@@ -9,7 +9,7 @@ package jogorpg.personagens;
  *
  * @author lele
  */
-public abstract class Fighting_Character extends Personagem{
+public abstract class Fighting_Character extends PersonagemComInventario{
     private int ataque;
     private int defesa;
     private float energia;

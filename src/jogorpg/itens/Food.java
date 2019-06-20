@@ -26,5 +26,10 @@ public class Food extends Item{
     public void use(Fighting_Character F) {
         F.setEnergia(F.getEnergia()+this.give_energy);
     }
+
+    @Override
+    public String getPrintLine() {
+        return this.getNome()+" restored some energy.";
+    }
     
 }

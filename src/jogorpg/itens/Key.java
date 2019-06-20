@@ -20,7 +20,12 @@ public class Key extends Item {
 
     @Override
     public void use(Fighting_Character F) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Not supported yet");
+    }
+
+    @Override
+    public String getPrintLine() {
+        return "Not supported yet";
     }
 
     

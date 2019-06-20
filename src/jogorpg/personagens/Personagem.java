@@ -5,19 +5,16 @@
  */
 package jogorpg.personagens;
 
-
 /**
  *
  * @author lele
  */
 public abstract class Personagem {
     private String nome;
-    private float l_peso;
     private boolean alive;
     private boolean poison;
 
-    public Personagem(float carregar) {
-        this.l_peso = carregar;
+    public Personagem() {
         this.alive = true; 
         this.poison = false;
     }
@@ -27,12 +24,6 @@ public abstract class Personagem {
     public String getNome(){
         return this.nome;
     }
-    
-
-    public float getL_Peso(){
-        return this.l_peso;
-    }
-    
     
     public boolean isPoisoned(){
         return this.poison;

@@ -5,11 +5,9 @@ import jogorpg.itens.*;
 import jogorpg.monsters.*;
 import jogorpg.personagens.*;
 import java.awt.Desktop;
-import static java.lang.Thread.sleep;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 
 
@@ -56,7 +54,7 @@ public class Game
         } catch (IOException e){//If something goes wrong in creating the file, an exeption in caught.
             System.out.println("AN ERROR HAS OCURRED. CANNOT CREATE YOUR GAME LOG");
         }
-        h = new Hero(5,5,15,8);
+        h = new Hero(5,5,25,15);
         
     }
 
@@ -78,10 +76,13 @@ public class Game
         
         Weapon stick;
         
+        Food f1;
+        
+        Personagem fairy,warrior,musician,seer,robber;
         // create the rooms
         cave_entrance = new Room("outside that weird cave Ilea likes so much. You hear someone crying for help. It seems to be Ilea.","Outside the Cave");
-        inside_cave = new Room ("inside the cave. It's too dark, and you are now sure it's Ilea who's crying for help.\n There's a hole in the ground, and you are sure that's where the cries are comming from.","The Cave");
-        long_stone_corridor = new Room("in a long stone corridor. There is something weird in the air, and no sign of Ilea.\n You cannot go back the same way you came in and you have to keep searching","Long Stone Corridor");
+        inside_cave = new Room ("inside the cave. It's too dark, and you are now sure it's Ilea who's crying for help.\nThere's a hole in the ground, and you are sure that's where the cries are comming from.","The Cave");
+        long_stone_corridor = new Room("in a long stone corridor. There is something weird in the air, and no sign of Ilea.\nYou cannot go back the same way you came in and you have to keep searching","Long Stone Corridor");
         jail = new Room("in some kind of jail. There are some people caged. They seem to be sleeping, but you have to find out where you sister is.","Jail");
         library = new Room("in a dusty old library. There are old books everywhere. ","Library");
         wet_stone_corridor = new Room("in a stone corridor. The walls are wet, there must be water nearby.","Wet Stone Corridor");
@@ -98,10 +99,10 @@ public class Game
         final_room = new Room("running through the passageway. The light is near, and you find yourselves in the forest, near the cave.\n Most important, near home.\n----THE END----","THE END");
         
         //creating monsters
-        bat1 = new Bat("Bat1");
+       /* bat1 = new Bat("Bat1");
         bat2 = new Bat("Bat2");
         bat3 = new Bat("Bat3");
-        bat4 = new Bat("Bat4");
+        bat4 = new Bat("Bat4");*/
         
         rat1 = new Rat("Rat1");
         rat2 = new Rat("Rat2");
@@ -109,7 +110,7 @@ public class Game
         rat4 = new Rat("Rat4");
         rat5 = new Rat("Rat5");
         
-        snake1 = new Snake("Snake1",false);
+       /* snake1 = new Snake("Snake1",false);
         snake2 = new Snake("Snake2",true);
         snake3 = new Snake("Snake3",true);
         snake4 = new Snake("Snake4",false);
@@ -119,18 +120,29 @@ public class Game
         spider3 = new Spider("Spider3",false);
         spider4 = new Spider("Spider4",false);
         
-        bossscorpion1 = new BossScorpion("BossScorpion1");
-        bossscorpion2 = new BossScorpion("BossScorpion2");
+        bossscorpion1 = new BossScorpion("Boss Scorpion1");
+        bossscorpion2 = new BossScorpion("Boss Scorpion2");
         
-        bosssnake1 = new BossSnake("BossSnake1");
-        bosssnake2 = new BossSnake("BossSnake2");
+        bosssnake1 = new BossSnake("Boss Snake1");
+        bosssnake2 = new BossSnake("Boss Snake2");
         
         scorpion1 = new Scorpion("Scorpion1",true);
         scorpion2 = new Scorpion("Scorpion2",false);
         scorpion3 = new Scorpion("Scorpion3",true);
-        scorpion4 = new Scorpion("Scorpion4",true);
+        scorpion4 = new Scorpion("Scorpion4",true);*/
         
-        stick = new Weapon("Stick",1,"a fragile wooden stick.",2,2,10);
+       //CREATE WEAPONS
+        stick = new Attack_Weapon("Stick",1,"a fragile wooden stick that could be used as a weapon.",2,2,10);
+        
+       //CREATE ITEMS
+        f1 = new Food("Biscuits",1,5,"a pack with biscuits found in the cave floor.");
+        
+        //CREATE CHARACTERS
+        fairy = new Fairy("Fairy");
+        warrior = new Warrior("Warrior");
+        musician = new Musician("Musician");
+        seer = new Seer("Seer");
+        robber = new Robber("Robber");
         
         // initialise room exits, monsters, characters and items
         cave_entrance.setExit("east",inside_cave);
@@ -139,57 +151,61 @@ public class Game
         inside_cave.setExit("down",long_stone_corridor);
         
         long_stone_corridor.setExit("east", jail);
+        long_stone_corridor.setItem(f1.getNome(),f1);
         long_stone_corridor.setItem(stick.getNome(),stick);
-        
         long_stone_corridor.setMonstro(rat1.getNome(),rat1);
-        
-        //long_stone_corridor.setItem("Espada", i);
+        long_stone_corridor.setMonstro(rat2.getNome(),rat2);
         
         jail.setExit("west", long_stone_corridor);
         jail.setExit("east", library);
-        jail.setMonstro(rat1.getNome(),rat1);
-        jail.setMonstro(spider2.getNome(),spider2);
+        jail.setPessoa(fairy.getNome(), fairy);
+        jail.setPessoa(warrior.getNome(), warrior);
+        jail.setPessoa(musician.getNome(), musician);
+        jail.setPessoa(seer.getNome(), seer);
+        jail.setPessoa(robber.getNome(), robber);
+        //jail.setMonstro(rat1.getNome(),rat1);
+        //jail.setMonstro(spider2.getNome(),spider2);
         
         library.setExit("west",jail);
         library.setExit("north",storage_room);
         library.setExit("south", alchemy_lab);
         library.setExit("east",wet_stone_corridor);
-        library.setMonstro(spider3.getNome(),spider3);
-        library.setMonstro(spider4.getNome(),spider4);
-        library.setMonstro(snake1.getNome(),snake1);
+        //library.setMonstro(spider3.getNome(),spider3);
+        //library.setMonstro(spider4.getNome(),spider4);
+        //library.setMonstro(snake1.getNome(),snake1);
         
         storage_room.setExit("south",library);
         storage_room.setMonstro(rat3.getNome(), rat3);
         storage_room.setMonstro(rat4.getNome(), rat4);
-        storage_room.setMonstro(scorpion3.getNome(), scorpion3);
-        storage_room.setMonstro(bossscorpion1.getNome(), bossscorpion1);
+        //storage_room.setMonstro(scorpion3.getNome(), scorpion3);
+        //storage_room.setMonstro(bossscorpion1.getNome(), bossscorpion1);
         
         alchemy_lab.setExit("north",library);
-        alchemy_lab.setMonstro(scorpion1.getNome(), scorpion1);
-        alchemy_lab.setMonstro(scorpion2.getNome(), scorpion2);
-        alchemy_lab.setMonstro(rat2.getNome(), rat2);
-        alchemy_lab.setMonstro(snake2.getNome(), snake2);
+        //alchemy_lab.setMonstro(scorpion1.getNome(), scorpion1);
+        //alchemy_lab.setMonstro(scorpion2.getNome(), scorpion2);
+        //alchemy_lab.setMonstro(rat2.getNome(), rat2);
+        //alchemy_lab.setMonstro(snake2.getNome(), snake2);
         
         wet_stone_corridor.setExit("west",library);
         wet_stone_corridor.setExit("south", gate);
         wet_stone_corridor.setExit("east",monster_nest);
-        wet_stone_corridor.setMonstro(bossscorpion2.getNome(),bossscorpion2);
+        //wet_stone_corridor.setMonstro(bossscorpion2.getNome(),bossscorpion2);
         
         gate.setExit("north", wet_stone_corridor);
         gate.setExit("west",boss1_room);
         gate.setExit("east",castle_corridor);//tem que ser one way
-        gate.setMonstro(bat3.getNome(),bat3);
-        gate.setMonstro(bat4.getNome(),bat4);
-        gate.setMonstro(snake3.getNome(),snake3);
+        //gate.setMonstro(bat3.getNome(),bat3);
+        //gate.setMonstro(bat4.getNome(),bat4);
+        //gate.setMonstro(snake3.getNome(),snake3);
         
         boss1_room.setExit("east", gate);
         
         monster_nest.setExit("west",wet_stone_corridor);
-        monster_nest.setMonstro(bosssnake1.getNome(),bosssnake1);
-        monster_nest.setMonstro(bosssnake2.getNome(),bosssnake2);
-        monster_nest.setMonstro(rat5.getNome(),rat5);
-        monster_nest.setMonstro(snake4.getNome(),snake4);
-        monster_nest.setMonstro(scorpion4.getNome(),scorpion4);
+        //monster_nest.setMonstro(bosssnake1.getNome(),bosssnake1);
+        //monster_nest.setMonstro(bosssnake2.getNome(),bosssnake2);
+        //monster_nest.setMonstro(rat5.getNome(),rat5);
+        //monster_nest.setMonstro(snake4.getNome(),snake4);
+        //monster_nest.setMonstro(scorpion4.getNome(),scorpion4);
         
         castle_corridor.setExit("east",castle_entrance);
         
@@ -314,11 +330,19 @@ public class Game
             pickItem(command);
         }
         else if(commandWord == CommandWord.USE){
-            
+            useItem(command);
         }
         else if(commandWord==CommandWord.TALK){
-            talkTo(command);
-            
+            talkTo(command); 
+        }
+        else if(commandWord==CommandWord.EQUIP){
+            equip(command);
+        }
+        else if(commandWord==CommandWord.UNEQUIP){
+            unequip(command);
+        }
+        else if(commandWord==CommandWord.INVENTORY){
+            h.displayInventory();
         }
         // else command not recognised.
         return wantToQuit;
@@ -389,9 +413,9 @@ public class Game
 
         String name = command.getSecondWord();
         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
         } catch (InterruptedException ex) {
-           
+           //não altera nada se não conseguir
         }
         Monster m = currentRoom.getMonstro(name);
         if(m==null){
@@ -399,9 +423,25 @@ public class Game
            System.out.println(currentRoom.getMonstrosString());
             return;
         }
-        if(m.isAlive() && h.isAlive()){
+        if(m.isAlive() && h.isAlive()){//caso os dois estejam lutando
             escrita.println(h.getNome()+" is figthing " + m.getNome()+".");
             h.lutar(m);
+            if(h.getAttackWeapon()!=null){//se eu tiver uma arma de ou defesa ela tem o decremento de durabilidade aqui.
+                h.getAttackWeapon().use(h);//usa a arma
+                if(h.getAttackWeapon().getDestroy()){//se tiver esgotado a durabilidade da arma
+                    System.out.println("Attack Weapon "+h.getAttackWeapon().getNome()+" is broken.");
+                    escrita.println(h.getNome()+" broke " + h.getAttackWeapon().getNome()+"(Attack Weapon).");
+                    h.unequipAttackWeapon();//só tira o elemento do equipamento
+                }
+            }
+            if(h.getDefenseWeapon()!=null){//se eu tiver uma arma de ou defesa ela tem o decremento de durabilidade aqui.
+                h.getDefenseWeapon().use(h);//usa a arma
+                if(h.getDefenseWeapon().getDestroy()){//se tiver esgotado a durabilidade da arma
+                    System.out.println("Shield "+h.getDefenseWeapon().getNome()+" is broken.");
+                    escrita.println(h.getNome()+" broke " + h.getDefenseWeapon().getNome()+"(Defense Weapon).");
+                    h.unequipShield();//só tira o elemento do equipamento
+                }
+            }
         }
         if(h.isPoisoned()){
             m.decremento((float)2.0);
@@ -409,9 +449,13 @@ public class Game
             System.out.println("You are poisoned. Figthing hurts you. ");
         }
         if(!m.isAlive() && h.isAlive()){//o monstro precisa estar morto e o herói vivo, se o herói também morrer, não faz sentido imprimir a descrição
+            Coins dropped = (Coins) m.dropCoins();
+            currentRoom.setItem(dropped.getNome(), dropped);
             currentRoom.mataMonstro(m.getNome());
+            System.out.println(m.getNome() + " dropped something.");
             System.out.println(currentRoom.getLongDescription());
             escrita.println(h.getNome()+" killed " + m.getNome()+".");
+            escrita.println(m.getNome()+ " dropped " + dropped.getDescription());
         }
     }
      
@@ -423,7 +467,11 @@ public class Game
         }
 
         String name = command.getSecondWord();
-        
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
         Item i = currentRoom.getItem(name);
         
         if(i==null){
@@ -438,35 +486,43 @@ public class Game
     }
       
       private void dropItem(Command command){
-          if(!command.hasSecondWord()) {
+        if(!command.hasSecondWord()) {
             System.out.println("Drop what?");
             return;
         }
 
         String name = command.getSecondWord();
-        
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
         Item i = h.removerItem(name);//tira o item do inventário do herói
         
         if(i==null){
-           System.out.println("You do not have the item you want to remove.");
+           System.out.println("You do not have the item you want to drop.");
             System.out.println(h.getInventarioString());
             return;
         }
         currentRoom.setItem(i.getNome(),i);//e tira da sala
         System.out.println("You dropped "+ i.getDescription());
-        escrita.println(h.getNome()+" dropped " + i.getNome()+".");
+        escrita.println(h.getNome()+" dropped " +i.getDescription());
           
       }
       
       private void talkTo(Command command) 
     {
         if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Talk to whom?");
+            h.talk();
+            System.out.println("Talk with someone? ");
             return;
         }
         String pessoa_nome = command.getSecondWord();
-
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
         Personagem Pessoa = currentRoom.getPessoa(pessoa_nome);
 
         if (Pessoa == null) {
@@ -474,9 +530,132 @@ public class Game
             return;
         }
         Pessoa.talk();
-        escrita.println(h.getNome()+ " entered " + currentRoom.getName()+".");
+        escrita.println(h.getNome()+ " talked to " + Pessoa.getNome()+".");
     }
+      
+    private void equip(Command command){
+        if(!command.hasSecondWord()) {
+         System.out.println("Equip what?");
+          return;
+        }
 
+        String name = command.getSecondWord();//equip Stick
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
+        Item i = h.removerItem(name);//tira o item do inventário do herói
+        String print = new String("You equipped ");
+        String print_file = new String(h.getNome() + " equipped ");
+        if(i==null){
+            System.out.println("You do not have the item you want to equip.");//A mensagem de erro está na função getAttackWeapon
+            System.out.println(h.getInventarioString());
+            return;
+        }
+        else if(i instanceof Attack_Weapon){
+            if(h.getAttackWeapon()!=null){
+            System.out.println("You are already equipped with "+h.getAttackWeapon().getNome() + " you have to unequip it first");
+            return;
+            }
+           h.equipAttackWeapon((Attack_Weapon)i);
+           print+= i.getNome()+ ", a Attack Weapon. ";
+           print_file+=i.getNome()+ ", a Attack Weapon. ";           
+           
+        }
+        else if(i instanceof Defense_Weapon){
+            if(h.getDefenseWeapon()!=null){
+            System.out.println("You are already equipped with "+h.getDefenseWeapon().getNome() + " you have to unequip it first");
+            return;
+            }
+           h.equipShield((Defense_Weapon)i);
+           print+= i.getNome()+ ", a Defense Weapon. ";
+           print_file+=i.getNome()+ ", a Defense Weapon. ";
+        }
+        System.out.println(print);
+        System.out.println(i.getNome()+" increased "+h.getNome()+"'s attributes");
+       // System.out.println(h.getInventarioString());//verificar o iventário
+
+        escrita.println(print_file);
+        escrita.println(i.getNome()+" increased "+h.getNome()+"'s attributes");
+          
+    }
+    
+     private void unequip(Command command){
+      if(!command.hasSecondWord()) {
+         System.out.println("Unquip what?");
+          return;
+        }
+
+        String name = command.getSecondWord();//unequip Stick
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
+        Item i;
+        String print = new String("You unequipped ");
+        String print_file = new String(h.getNome() + " unequipped ");
+        //if pra attack weapon
+        if(h.getAttackWeapon().getNome().equals(name)){
+           i = h.unequipAttackWeapon();
+           print+= i.getNome()+ ", a Attack Weapon. ";
+           print_file+=i.getNome()+ ", a Attack Weapon. "; 
+           if(!h.pickItem(i)){//caso o inventário do herói esteja cheio, o item volta pro inventário da sala
+               currentRoom.setItem(i.getNome(),i);
+           }
+        }
+        //ifs pra Defense weapon
+        else if(h.getDefenseWeapon().getNome().equals(name)){
+           i = h.unequipShield();
+           print+= i.getNome()+ ", a Defense Weapon. ";
+           print_file+=i.getNome()+ ", a Defense Weapon. "; 
+           if(!h.pickItem(i)){//caso o inventário do herói esteja cheio, o item volta pro inventário da sala
+               currentRoom.setItem(i.getNome(),i);
+           }
+        }
+        else {
+            System.out.println("You have nothing to unnequip with this name");
+            return;
+        }
+        //System.out.println(h.getInventarioString());//verificar o inventario
+        System.out.println(print);
+        System.out.println(i.getNome()+" decreased "+h.getNome()+"'s attributes");
+        
+        escrita.println(print_file);
+ 
+          
+    }
+       
+
+  private void useItem(Command command){
+        if(!command.hasSecondWord()) {
+            System.out.println("Use what?");
+            return;
+        }
+
+        String name = command.getSecondWord();
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
+        Item i = h.removerItem(name);//tira o item do inventário do herói
+        
+        if(i==null){
+           System.out.println("You do not have the item you want to use.");
+            System.out.println(h.getInventarioString());
+            return;
+        }
+        i.use(h);//o item i é usado por h
+        if(!i.getDestroy()){
+            h.pickItem(i);//se o item não tiver que ser destruido, inserir ele novamente no iventario do herói
+        }
+        System.out.println("You used "+ i.getDescription());
+        escrita.println(h.getNome()+" used " +i.getNome()+".");
+        escrita.println(i.getPrintLine());
+          
+      }
     /** 
      * "Quit" was entered. Check the rest of the command to see
      * whether we really quit the game.

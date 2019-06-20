@@ -43,9 +43,11 @@ public abstract class Item {
     public void setDestroy(boolean d){
         this.destroy = d;
     }
-    public abstract void use(Fighting_Character F);
-    
+   
     public String getDescription(){
         return this.getNome() +": "+this.description;
     }
+    
+     public abstract void use(Fighting_Character F);
+     public abstract String getPrintLine();
 }

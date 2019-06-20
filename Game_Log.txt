@@ -5,10 +5,16 @@ lele started to play.
 lele entered The Cave.
 ----------------------------------
 lele entered Long Stone Corridor.
+lele picked Stick: a fragile wooden stick that could be used as a weapon.
+lele picked Biscuits: a pack with biscuits found in the cave floor.
 lele is figthing Rat1.
 lele is figthing Rat1.
 lele is figthing Rat1.
 lele killed Rat1.
+Rat1 dropped Coins: golden coins(30).
+lele equipped Stick, a Attack Weapon. 
+Stick increased lele's attributes
+lele unequipped Stick, a Attack Weapon. 
 ----------------------------------
 lele quitted the game.
 ----------------------------------

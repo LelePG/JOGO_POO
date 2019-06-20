@@ -5,7 +5,10 @@
  */
 package jogorpg.personagens;
 
-import jogorpg.personagens.Personagem;
+
+import java.io.*;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 /**
  *
@@ -13,14 +16,36 @@ import jogorpg.personagens.Personagem;
  */
 public class Warrior extends Personagem{
     
-    public Warrior( float carregar) {
-        super( carregar);
-        this.setNome("Winslow");
+   private File warrior_lines;
+    Scanner scanner;
+    
+    public Warrior(String nome) {
+        this.setNome(nome);
+        warrior_lines = new File("Warrior_Lines.txt");
+        scanner =null;
+        try{
+            scanner = new Scanner(warrior_lines);
+            
+        }catch(FileNotFoundException e){
+            System.out.println("mm");
+        }
     }
 
-    @Override
-    public void talk() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     @Override
+    public void talk(){
+        try{
+        String line = scanner.nextLine();
+        
+        while(scanner.hasNext() && !line.equals("--XX--")){
+            System.out.println(line);
+            line = scanner.nextLine();
+            if(!scanner.hasNext()){
+            System.out.println("You can leave me now, dear. It's an order.");
+            }
+        }    
+        }catch (NoSuchElementException e){
+             System.out.println("You can leave me now, dear. It's an order.");
+         }   
+                
     }
-    
 }

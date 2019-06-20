@@ -23,7 +23,7 @@ public class BossSnake extends BossMonster{
         this.setDefesa(16);
         this.setMax_energia(25);
         this.setEnergia(25);
-        i = new Weapon("Dark-Shield",2,"A Dark Iron Shield.",0,4,20);
+        i = new Defense_Weapon("Dark-Shield",2,"A Dark Iron Shield.",0,4,20);
     }
     
     @Override
