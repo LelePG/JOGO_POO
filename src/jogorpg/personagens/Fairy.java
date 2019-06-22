@@ -34,9 +34,9 @@ public class Fairy extends Personagem{
         while(scanner.hasNext() && !line.equals("--XX--")){
             System.out.println(line);
             line = scanner.nextLine();
-            if(!scanner.hasNext()){
-            System.out.println("I've told you all I know. Go away now.");
-            }
+           // if(!scanner.hasNext()){
+           // System.out.println("I've told you all I know. Go away now.");
+           // }
         }    
         }catch (NoSuchElementException e){
              System.out.println("I've told you all I know. Go away now.");

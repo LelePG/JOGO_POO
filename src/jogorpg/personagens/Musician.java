@@ -35,9 +35,9 @@ public class Musician extends Personagem{
         while(scanner.hasNext() && !line.equals("--XX--")){
             System.out.println(line);
             line = scanner.nextLine();
-            if(!scanner.hasNext()){
-            System.out.println("You should not stay here kid. Your sister may not have much time left.");
-            }
+          //  if(!scanner.hasNext()){
+          //  System.out.println("You should not stay here kid. Your sister may not have much time left.");
+           // }
         }    
         }catch (NoSuchElementException e){
              System.out.println("I wish you good luck. I'll write a song about you if I ever get out of here");

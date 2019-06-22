@@ -13,13 +13,36 @@ import java.util.Scanner;
  * @author lele
  */
 public class TalkingStatue extends Personagem {
-
-   
+ private File Statue_Lines;
+    Scanner scanner;
+    public TalkingStatue(String nome) {
+        this.setNome(nome);
+        Statue_Lines = new File("Statue_Lines.txt");
+        scanner =null;
+        try{
+            scanner = new Scanner(Statue_Lines);
+            
+        }catch(FileNotFoundException e){
+            System.out.println("Cannot talk to "+this.getNome());
+        }
+    }
     
-
     @Override
-    public void talk() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void talk(){
+        try{
+        String line = scanner.nextLine();
+        
+        while(scanner.hasNext() && !line.equals("--XX--")){
+            System.out.println(line);
+            line = scanner.nextLine();
+            //if(!scanner.hasNext()){
+            //System.out.println("Pick all you need, and drop what you don't. The King made this room for it.");
+            //}
+        }    
+        }catch (NoSuchElementException e){
+             System.out.println("Pick all you need, and drop what you don't. The King made this room for it.");
+         }   
+                
     }
     
 }

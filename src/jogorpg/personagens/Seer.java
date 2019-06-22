@@ -24,7 +24,7 @@ private File seer_lines;
             scanner = new Scanner(seer_lines);
             
         }catch(FileNotFoundException e){
-            System.out.println("mm");
+            System.out.println("Cannot talk to "+this.getNome());
         }
     }
 
@@ -36,12 +36,12 @@ private File seer_lines;
         while(scanner.hasNext() && !line.equals("--XX--")){
             System.out.println(line);
             line = scanner.nextLine();
-            if(!scanner.hasNext()){
-            System.out.println("You can leave me now, dear. It's an order.");
-            }
+            //if(!scanner.hasNext()){
+           // System.out.println("I cannot say anything else to you.");
+            //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("You can leave me now, dear. It's an order.");
+             System.out.println("I've told you all I can. Good luck.");
          }   
                 
     }

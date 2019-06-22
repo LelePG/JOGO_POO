@@ -94,7 +94,7 @@ public class Room
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
         for(String exit : keys) {
-            returnString += " " + exit;
+            returnString += "-" + exit + "-";
         }
         return returnString;
     }
@@ -132,7 +132,7 @@ public class Room
         }
         Set<String> keys = pessoas.keySet();
         for(String pessoas: keys){
-            ret+=" " + pessoas;
+            ret+="-" + pessoas+"-";
         }
         return ret;
     }
@@ -171,7 +171,7 @@ public class Room
             return "There are no monsters around. You are safe.";
         }
         for(String key: monstros.keySet()){
-            ret+=" " + key  ;
+            ret+="-" + key+"-"  ;
         }
         return ret;
     }
@@ -211,7 +211,7 @@ public class Room
             return "There are no itens here.";
         }
         for(String key: itens.keySet()){
-            ret+=" "+key;
+            ret+="-"+key+"-";
         }
         return ret;
     }

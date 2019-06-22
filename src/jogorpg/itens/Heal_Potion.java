@@ -31,6 +31,7 @@ public class Heal_Potion extends Potion {
     public String getPrintLine() {
        return this.getNome()+" restored some energy.";
     }
+    
 
     
     

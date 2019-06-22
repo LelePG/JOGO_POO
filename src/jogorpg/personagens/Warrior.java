@@ -27,7 +27,7 @@ public class Warrior extends Personagem{
             scanner = new Scanner(warrior_lines);
             
         }catch(FileNotFoundException e){
-            System.out.println("mm");
+            System.out.println("Cannot talk to "+this.getNome());
         }
     }
 
@@ -39,12 +39,12 @@ public class Warrior extends Personagem{
         while(scanner.hasNext() && !line.equals("--XX--")){
             System.out.println(line);
             line = scanner.nextLine();
-            if(!scanner.hasNext()){
-            System.out.println("You can leave me now, dear. It's an order.");
-            }
+           // if(!scanner.hasNext()){
+            //System.out.println("I hope you know how to fight. You'll need it.");
+            //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("You can leave me now, dear. It's an order.");
+             System.out.println("Try to keep yourself alive. You won't be able to save your sister if you are dead!");
          }   
                 
     }

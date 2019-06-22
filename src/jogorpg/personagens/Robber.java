@@ -37,9 +37,9 @@ private File robber_lines;
         while(scanner.hasNext() && !line.equals("--XX--")){
             System.out.println(line);
             line = scanner.nextLine();
-            if(!scanner.hasNext()){
-            System.out.println("You are lucky I'm caged. Otherwise...");
-            }
+           // if(!scanner.hasNext()){
+            //System.out.println("You are lucky I'm caged. Otherwise...");
+            //}
         }    
         }catch (NoSuchElementException e){
              System.out.println("GO AWAY, KID!");

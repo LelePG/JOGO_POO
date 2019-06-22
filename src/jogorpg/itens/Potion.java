@@ -43,5 +43,5 @@ public abstract class Potion extends Item {
     public abstract String getPotionType();
     
     public abstract void use(Fighting_Character F);
-    
+    public abstract String getPrintLine();
 }
