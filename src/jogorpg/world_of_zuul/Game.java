@@ -9,8 +9,6 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 
-
-
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -34,7 +32,7 @@ public class Game
     private Room currentRoom;
     private boolean finished;
     private File registro;//File that I'm writing ing
-    private PrintWriter escrita;//Object to print in my file
+    private BufferedWriter escrita;//Object to print in my file
     private Hero h;
 
     /**
@@ -46,15 +44,15 @@ public class Game
         parser = new Parser();
         finished = false;
         try{//try to create a file names Game_log
-            registro = new File("src/jogorpg/resources/Game_Log.txt");
+            registro = new File("Game_Log.txt");
             if(!registro.exists()){//if this file doesn't exist, it's created. If it does, it's overwrited
                 registro.createNewFile();
             }
-            escrita = new PrintWriter(registro);
+            escrita = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(registro)));
         } catch (IOException e){//If something goes wrong in creating the file, an exeption in caught.
             System.out.println("AN ERROR HAS OCURRED. CANNOT CREATE YOUR GAME LOG");
         }
-        h = new Hero(5,5,25,15);
+        h = new Hero(5,5,30,15);
         
     }
 
@@ -80,7 +78,7 @@ public class Game
         Food f1,f2,f3,f4;
         
         Potion h1,h2,h3,h4,h5,s1,s2,p1,p2,p3,p4,p5;
-        Personagem fairy,warrior,musician,seer,robber,statue;
+        Personagem fairy,warrior,musician,seer,robber,statue,witch,ilea;
         // create the rooms
         cave_entrance = new Room("outside that weird cave Ilea likes so much. You hear someone crying for help. It seems to be Ilea.","Outside the Cave");
         inside_cave = new Room ("inside the cave. It's too dark, and you are now sure it's Ilea who's crying for help.\nThere's a hole in the ground, and you are sure that's where the cries are comming from.","The Cave");
@@ -146,7 +144,8 @@ public class Game
         heavy_wooden_shield = new Defense_Weapon("Heavy_Wooden_Shield",5,"a heavy shield make of wood. Seems resistent.",3,4,30);
         battle_axe = new Attack_Weapon("Battle_Axe",7,"a heavy axe. Looks deadly.",10,5,20);
 	spiked_club= new Attack_Weapon("Spiked_Club",5,"a club with spikes. It looks scary.",12,3,25);
-       //CREATE ITEMS
+       
+//CREATE ITEMS
         f1 = new Food("Biscuits",1,5,"a pack with biscuits found in the cave floor.");
         f2 = new Food("Biscuits",1,5,"a pack with biscuits found in the prision floor.");
         f3 = new Food("Grape_Pie",2,10,"a pretty grape pie.");
@@ -174,6 +173,8 @@ public class Game
         seer = new Seer("Seer");
         robber = new Robber("Robber");
         statue = new TalkingStatue("Statue");
+        witch = new Witch("Witch");
+        ilea = new Ilea("Ilea");
         
         // initialise room exits, monsters, characters and items
         cave_entrance.setExit("east",inside_cave);
@@ -269,14 +270,17 @@ public class Game
         castle_entrance.setMonstro(scorpion5.getNome(),scorpion5);
         
         castle_jail.setExit("south",castle_entrance);
+        castle_jail.setPessoa(witch.getNome(),witch);
 	castle_jail.setItem(spiked_club.getNome(),spiked_club);
 	castle_jail.setItem(p5.getNome(),p5);
 	castle_jail.setItem(h4.getNome(),h4);
         
         castle_garden.setExit("east", castle_throne_room);
+        castle_garden.setPessoa(ilea.getNome(), ilea);
         castle_garden.setMonstro(bosssnake.getNome(),bosssnake);
         
         castle_throne_room.setExit("north",final_room);
+        castle_throne_room.setPessoa(ilea.getNome(), ilea);
 	castle_throne_room.setMonstro(bossscorpion.getNome(),bossscorpion);
 	castle_throne_room.setItem(h5.getNome(),h5);
         
@@ -284,15 +288,22 @@ public class Game
         currentRoom = jail;
     }
 
+    public void escreve(String escreve){
+        try{
+            escrita.write(escreve+'\n');
+        } catch (IOException ex) {
+            System.out.println("Error recording action.");
+        }
+    }
     /**
      *  Main play routine.  Loops until end of play.
      */
     public void play() 
     {   
         printWelcome();
-        escrita.println("----------------------------------");
-        escrita.println(h.getNome() + " started to play.");
-        escrita.println("----------------------------------");
+        escreve("----------------------------------");
+        escreve(h.getNome() + " started to play.");
+        escreve("----------------------------------");
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
@@ -301,7 +312,6 @@ public class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        escrita.close();//closing PrintWriter
         //So, here the game if over, all I have to do is ask if the person wants to display the game log
         this.showGameLog();
         System.out.println("Thank you for playing.  Good bye.");
@@ -310,6 +320,13 @@ public class Game
     private void showGameLog(){
         Scanner c = new Scanner(System.in);//creates a scanner so I can read the input
         String cont;//and a String to save it
+        
+        try {//antes mesmo de verificar o game log, e preciso fechar o buffer
+            escrita.close();//closing BufferedWriter
+        } catch (IOException ex) {
+            System.out.println("Error saving Game Log");
+        }
+        
         System.out.println("Do you want to open your Game Log? Y/N ");
         cont = c.nextLine();//reads the answer
         if(cont.equals("Y") || cont.equals("y")){//if the person wants to show the game log...
@@ -370,9 +387,9 @@ public class Game
         }
         else if (commandWord == CommandWord.QUIT) {
             wantToQuit = quit(command);
-            escrita.println("----------------------------------");
-            escrita.println(h.getNome()+" quitted the game.");
-            escrita.println("----------------------------------");
+            escreve("----------------------------------");
+            escreve(h.getNome()+" quitted the game.");
+            escreve("----------------------------------");
         }
         else if(commandWord ==CommandWord.ATTACK){
             attackMonster(command);
@@ -381,9 +398,9 @@ public class Game
                 System.out.println("######GAME OVER#######");
                 System.out.println("######################");
                 
-                escrita.println("----------------------------------");
-                escrita.println(h.getNome() + " Died. Game over");
-                escrita.println("----------------------------------");
+                escreve("----------------------------------");
+                escreve(h.getNome() + " Died. Game over");
+                escreve("----------------------------------");
                 wantToQuit = true;
             }
         }
@@ -415,7 +432,13 @@ public class Game
         return wantToQuit;
     }
 
-    // implementations of user commands:
+    private void delay(){//as vezes o print que a função faz sai antes no terminal do que o comando de entrada. Essa função deixa um tempo pro comando aparecer na saida e depois libera os prints da função.
+         try {
+            TimeUnit.SECONDS.sleep((long) 0.4);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+        } catch (InterruptedException ex) {
+           //não altera nada se não conseguir
+        }
+    }
 
     /**
      * Print out some help information.
@@ -429,8 +452,9 @@ public class Game
         System.out.println("Your command words are:");
         parser.showCommands();
         System.out.println();
-        System.out.println( currentRoom.getExitString() + "\n" + currentRoom.getPessoasString() +"\n"+ currentRoom.getMonstrosString() +"\n"+currentRoom.getItensString());
+        System.out.println( currentRoom.getLongDescription());
     }
+   
 
     /** 
      * Try to go to one direction. If there is an exit, enter the new
@@ -443,9 +467,9 @@ public class Game
             System.out.println("Go where?");
             return;
         }
-
+        delay();
+        
         String direction = command.getSecondWord();
-
         // Try to leave current room.
         Room nextRoom = currentRoom.getExit(direction);
         
@@ -456,14 +480,14 @@ public class Game
             if(currentRoom.sairSala()){
                 currentRoom = nextRoom;
                 if(this.currentRoom.getName().equals("THE END")){//quando eu chegar no final do jogo
-                escrita.println("----------------------------------");
-                escrita.println(h.getNome()+ " finished the game");
+                escreve("----------------------------------");
+                escreve(h.getNome()+ " finished the game");
                     System.out.println(currentRoom.getShortDescription());
                     return;
                 }
                 System.out.println(currentRoom.getLongDescription());
-                escrita.println("----------------------------------");
-                escrita.println(h.getNome()+ " entered " + currentRoom.getName()+".");
+                escreve("----------------------------------");
+                escreve(h.getNome()+ " entered " + currentRoom.getName()+".");
             }
             else{
                 System.out.println("You cannot leave monsters behind. You must end them all.");
@@ -472,6 +496,7 @@ public class Game
         }
         
     }
+    
     /**
      * Try to attack a monster. If the monster is not found
      * return an error message
@@ -484,12 +509,10 @@ public class Game
             return;
         }
 
+        delay();
+        
         String name = command.getSecondWord();
-        try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+        
         Monster m = currentRoom.getMonstro(name);
         if(m==null){
            System.out.println("There's no monster with this name here.");
@@ -497,13 +520,13 @@ public class Game
             return;
         }
         if(m.isAlive() && h.isAlive()){//caso os dois estejam lutando
-            escrita.println(h.getNome()+" is figthing " + m.getNome()+".");
+            escreve(h.getNome()+" is figthing " + m.getNome()+".");
             h.lutar(m);
             if(h.getAttackWeapon()!=null){//se eu tiver uma arma de ou defesa ela tem o decremento de durabilidade aqui.
                 h.getAttackWeapon().use(h);//usa a arma
                 if(h.getAttackWeapon().getDestroy()){//se tiver esgotado a durabilidade da arma
                     System.out.println("Attack Weapon "+h.getAttackWeapon().getNome()+" is broken.");
-                    escrita.println(h.getNome()+" broke " + h.getAttackWeapon().getNome()+"(Attack Weapon).");
+                    escreve(h.getNome()+" broke " + h.getAttackWeapon().getNome()+"(Attack Weapon).");
                     h.unequipAttackWeapon();//só tira o elemento do equipamento
                 }
             }
@@ -511,14 +534,14 @@ public class Game
                 h.getDefenseWeapon().use(h);//usa a arma
                 if(h.getDefenseWeapon().getDestroy()){//se tiver esgotado a durabilidade da arma
                     System.out.println("Shield "+h.getDefenseWeapon().getNome()+" is broken.");
-                    escrita.println(h.getNome()+" broke " + h.getDefenseWeapon().getNome()+"(Defense Weapon).");
+                    escreve(h.getNome()+" broke " + h.getDefenseWeapon().getNome()+"(Defense Weapon).");
                     h.unequipShield();//só tira o elemento do equipamento
                 }
             }
         }
         if(h.isPoisoned()){
             m.decremento((float)2.0);
-            escrita.println(h.getNome()+" is poisoned. ");
+            escreve(h.getNome()+" is poisoned. ");
             System.out.println("You are poisoned. Figthing hurts you. ");
         }
         if(!m.isAlive() && h.isAlive()){//o monstro precisa estar morto e o herói vivo, se o herói também morrer, não faz sentido imprimir a descrição
@@ -528,8 +551,8 @@ public class Game
             currentRoom.mataMonstro(m.getNome());
             System.out.println(m.getNome() + " dropped something.");
             System.out.println(currentRoom.getLongDescription());
-            escrita.println(h.getNome()+" killed " + m.getNome()+".");
-            escrita.println(m.getNome()+ " dropped something.");
+            escreve(h.getNome()+" killed " + m.getNome()+".");
+            escreve(m.getNome()+ " dropped something.");
         }
     }
      
@@ -539,13 +562,10 @@ public class Game
             System.out.println("Pick what?");
             return;
         }
+        delay();
 
         String name = command.getSecondWord();
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+       
         Item i = currentRoom.getItem(name);
         
         if(i==null){
@@ -557,7 +577,7 @@ public class Game
        if(h.pickItem(i)){//coloca no inventario do herói
         currentRoom.removeItem(i.getNome());//e tira da sala
         System.out.println("You picked "+ i.getDescription());
-        escrita.println(h.getNome()+" picked " + i.getDescription());
+        escreve(h.getNome()+" picked " + i.getDescription());
        }
        else{
            System.out.println("You can't carry this. It's too heavy for you.");
@@ -569,13 +589,8 @@ public class Game
             System.out.println("Drop what?");
             return;
         }
-
+        delay();
         String name = command.getSecondWord();
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
         Item i = h.removerItem(name);//tira o item do inventário do herói
         
         if(i==null){
@@ -585,7 +600,7 @@ public class Game
         }
         currentRoom.setItem(i.getNome(),i);//e tira da sala
         System.out.println("You dropped "+ i.getDescription());
-        escrita.println(h.getNome()+" dropped " +i.getDescription());
+        escreve(h.getNome()+" dropped " +i.getDescription());
           
       }
       
@@ -596,12 +611,9 @@ public class Game
             System.out.println("Talk with someone? ");
             return;
         }
+        delay();
         String pessoa_nome = command.getSecondWord();
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+        
         Personagem Pessoa = currentRoom.getPessoa(pessoa_nome);
 
         if (Pessoa == null) {
@@ -609,7 +621,7 @@ public class Game
             return;
         }
         Pessoa.talk();
-        escrita.println(h.getNome()+ " talked to " + Pessoa.getNome()+".");
+        escreve(h.getNome()+ " talked to " + Pessoa.getNome()+".");
     }
       
     private void equip(Command command){
@@ -617,13 +629,9 @@ public class Game
          System.out.println("Equip what?");
           return;
         }
-
+        delay();
         String name = command.getSecondWord();//equip Stick
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+        
         Item i = h.removerItem(name);//tira o item do inventário do herói
         String print = new String("You equipped ");
         String print_file = new String(h.getNome() + " equipped ");
@@ -657,8 +665,8 @@ public class Game
         System.out.println(i.getNome()+" increased "+h.getNome()+"'s attributes");
        // System.out.println(h.getInventarioString());//verificar o iventário
 
-        escrita.println(print_file);
-        escrita.println(i.getNome()+" increased "+h.getNome()+"'s attributes");
+        escreve(print_file);
+        escreve(i.getNome()+" increased "+h.getNome()+"'s attributes");
           
     }
     
@@ -667,13 +675,9 @@ public class Game
          System.out.println("Unquip what?");
           return;
         }
-
+      delay();
         String name = command.getSecondWord();//unequip Stick
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+       
         Item i;
         String print = new String("You unequipped ");
         String print_file = new String(h.getNome() + " unequipped ");
@@ -704,7 +708,7 @@ public class Game
         System.out.println(print);
         System.out.println(h.getNome()+"'s attributes were decreased.");
         
-        escrita.println(print_file);
+        escreve(print_file);
  
           
     }
@@ -715,13 +719,9 @@ public class Game
             System.out.println("Use what?");
             return;
         }
-
+        delay();
         String name = command.getSecondWord();
-         try {
-            TimeUnit.SECONDS.sleep((long) 0.2);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
-        } catch (InterruptedException ex) {
-           //não altera nada se não conseguir
-        }
+        
         Item i = h.removerItem(name);//tira o item do inventário do herói
         
         if(i==null){
@@ -734,8 +734,8 @@ public class Game
             h.pickItem(i);//se o item não tiver que ser destruido, inserir ele novamente no iventario do herói
         }
         System.out.println("You used "+ i.getDescription());
-        escrita.println(h.getNome()+" used " +i.getNome()+".");
-        escrita.println(i.getPrintLine());
+        escreve(h.getNome()+" used " +i.getNome()+".");
+        escreve(i.getPrintLine());
           
       }
   
@@ -753,11 +753,14 @@ public class Game
             h.setEnergia(30);
             h.setAtaque(30);
             h.setDefesa(30);
+            escreve("****A CHEAT WAS USED****");
             return;
         }
         else if (action.equals("killall")) {
-            currentRoom.emptyMonsters();
+            currentRoom.emptyMonsters(currentRoom);
             System.out.println(currentRoom.getLongDescription());
+            escreve("****A CHEAT WAS USED****");
+            return;
         }
         
     }

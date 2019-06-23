@@ -5,6 +5,9 @@
  */
 package jogorpg.personagens;
 
+import jogorpg.itens.*;
+import jogorpg.monsters.Monster;
+
 /**
  *
  * @author lele
@@ -15,17 +18,66 @@ public abstract class Fighting_Character extends PersonagemComInventario{
     private float energia;
     private int max_energia;
     private int valor_maximo_atributos;
+     private Attack_Weapon Attack_Weapon;
+    private Defense_Weapon Shield;
+    
     public Fighting_Character(int ataque, int defesa, int energia, float carregar) {
         super(carregar);
         this.ataque = ataque;
         this.defesa = defesa;
         this.energia = energia;
         this.valor_maximo_atributos = 30;
+        this.Attack_Weapon = null;
+        this.Shield = null;
     }
+    
+    public void equipmentModifiers(Monster m){
+        if(this.Attack_Weapon!=null){
+            m.decremento(2);
+            this.energia++;
+        }
+        if(this.Shield!=null){
+            this.energia++;
+        }
+    }
+    
+     public Weapon getAttackWeapon(){
+        return this.Attack_Weapon;
+    }
+    
+    public Weapon getDefenseWeapon(){
+        return this.Shield;
+    }
+    
     public int getMax_energia(){
         return this.max_energia;
     } 
 
+    public void equipAttackWeapon(Attack_Weapon w){
+        this.Attack_Weapon = w;
+        w.addModificador(this);
+    }
+   
+    public Weapon unequipAttackWeapon(){
+        this.Attack_Weapon.removeModificador(this);
+        Weapon aux = this.Attack_Weapon;
+        this.Attack_Weapon = null;
+        return aux;
+    }
+    
+    public void equipShield(Defense_Weapon w){
+        this.Shield = w;
+        w.addModificador(this);
+    }
+    
+    public Weapon unequipShield(){
+        Weapon aux = this.Shield;
+       this.Shield.removeModificador(this);
+        this.Shield = null;
+        return aux;
+    }
+    
+    
     public int getDefesa() {
         return defesa;
     }

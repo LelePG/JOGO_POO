@@ -1,0 +1,49 @@
+----------------------------------
+lele started to play.
+----------------------------------
+lele picked Biscuits: a pack with biscuits found in the prision floor.
+lele picked Barrel_top: a barrel top. Could be used for self-defence, if you are completely out of options.
+lele equipped Barrel_top, a Defense Weapon. 
+Barrel_top increased lele's attributes
+----------------------------------
+lele entered Library.
+lele is figthing Rat3.
+lele is figthing Rat3.
+lele is figthing Rat3.
+lele killed Rat3.
+Rat3 dropped something.
+lele is figthing Rat4.
+lele is figthing Rat4.
+lele is figthing Rat4.
+lele killed Rat4.
+Rat4 dropped something.
+----------------------------------
+lele entered Storage Room.
+lele is figthing Bat1.
+lele is figthing Bat1.
+lele used Biscuits.
+Biscuits restored some of your energy.
+lele is figthing Bat1.
+lele is figthing Bat1.
+lele is figthing Bat1.
+lele picked Grape_Pie: a pretty grape pie.
+lele used Grape_Pie.
+Grape_Pie restored some of your energy.
+lele picked Club: a club. It seems to make lots of damage.
+lele equipped Club, a Attack Weapon. 
+Club increased lele's attributes
+lele is figthing Bat1.
+lele is figthing Bat1.
+lele killed Bat1.
+Bat1 dropped something.
+lele is figthing Rat5.
+lele is figthing Rat5.
+lele killed Rat5.
+Rat5 dropped something.
+lele is figthing Rat6.
+lele is figthing Rat6.
+lele killed Rat6.
+Rat6 dropped something.
+----------------------------------
+lele quitted the game.
+----------------------------------

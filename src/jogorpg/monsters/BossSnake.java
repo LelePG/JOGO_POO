@@ -8,7 +8,7 @@ package jogorpg.monsters;
 
 import jogorpg.itens.*;
 import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+
 
 /**
  *

@@ -198,8 +198,11 @@ public class Room
          return monstros.isEmpty();
      }
      
-     public void emptyMonsters(){
-         this.monstros.clear();
+     public void emptyMonsters(Room R){
+         for(Monster m: monstros.values()){
+            m.dropAll(R);
+        }
+         monstros.clear();
      }
      
      public String[] monstroLabel(){

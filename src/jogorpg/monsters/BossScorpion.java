@@ -20,21 +20,22 @@ public class BossScorpion extends BossMonster{
         this.setNome(nome);
         this.setAtaque(20);
         this.setDefesa(16);
-        this.setMax_energia(25);
-        this.setEnergia(25);
+        this.setMax_energia(30);
+        this.setEnergia(30);
         this.insereItem( new Defense_Weapon ("Light_Shield",3,"a fragile-looking shield.",2,5,25));
 	this. insereItem(new Food("Scorpion_tail",15,30,"i'ts raw, but can still be eaten."));
     }
     @Override
     public void attack(Fighting_Character P) {
-        if(P.getDefesa()<this.getAtaque()){
+        if(P.getDefesa()<this.getAtaque()/2){
             P.decremento(this.getAtaque()/2);
-            this.decremento(10-this.getAtaque());
-        }
-        else if(P.getDefesa()>=this.getAtaque()){
-            P.decremento(this.getAtaque()-P.getDefesa()/2);
             this.decremento(P.getAtaque()/3);
         }
+        else if(P.getDefesa()>=this.getAtaque()/2){
+            P.decremento(this.getAtaque()/3-P.getDefesa()/2);
+            this.decremento(P.getAtaque()/3);
+        }
+      
     }
     
     @Override

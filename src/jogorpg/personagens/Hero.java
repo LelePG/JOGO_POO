@@ -18,8 +18,7 @@ import jogorpg.monsters.*;
 public class Hero extends Fighting_Character{
     private HashMap<String,Item> inventario;
     private Coins moedas;
-    private Attack_Weapon Attack_Weapon;
-    private Defense_Weapon Shield;
+   
     
     public Hero( int ataque, int defesa, int energia,float carregar) {
         super( ataque, defesa, energia,carregar);
@@ -27,18 +26,9 @@ public class Hero extends Fighting_Character{
         moedas = new Coins("Coins1",1,"golden coins",100);
         inventario = new HashMap<String,Item>();
         this.pickItem(moedas);
-        this.Attack_Weapon = null;
-        this.Shield = null;
+  
     }
     
-    public Weapon getAttackWeapon(){
-        return this.Attack_Weapon;
-        
-    }
-    
-    public Weapon getDefenseWeapon(){
-        return this.Shield;
-    }
     
     public boolean pickItem(Item i){
         if(i.getPeso()+this.pesoInventario()>this.getL_Peso()){
@@ -48,7 +38,6 @@ public class Hero extends Fighting_Character{
         inventario.put(i.getNome(),i); 
         return true;
     }
-    
     
     
     public Item removerItem(String nome){
@@ -86,6 +75,7 @@ public class Hero extends Fighting_Character{
 
     public void lutar(Monster M){
         M.attack(this);//A MECÂNICA DE ATAQUE PROPRIAMENTE TÁ RELACIONADA AO MONSTRO, E NÃO AO PERSONAGEM
+        this.equipmentModifiers(M);//depois da batalha são adicionados os valores de modificadores caso o herói tenha algum equipamento
         System.out.println("#################");
         System.out.println(this.getNome()+ " VS " + M.getNome());
         System.out.println("HERO STATUS:");
@@ -105,29 +95,7 @@ public class Hero extends Fighting_Character{
        System.out.println("#################");
       }  
     
-    public void equipAttackWeapon(Attack_Weapon w){
-        this.Attack_Weapon = w;
-        w.addModificador(this);
-    }
     
-    public Weapon unequipAttackWeapon(){
-        this.Attack_Weapon.removeModificador(this);
-        Weapon aux = this.Attack_Weapon;
-        this.Attack_Weapon = null;
-        return aux;
-    }
-    
-    public void equipShield(Defense_Weapon w){
-        this.Shield = w;
-        w.addModificador(this);
-    }
-    
-    public Weapon unequipShield(){
-        Weapon aux = this.Shield;
-       this.Shield.removeModificador(this);
-        this.Shield = null;
-        return aux;
-    }
     
     public void displayInventory(){
         if(inventario.isEmpty()){

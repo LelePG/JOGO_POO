@@ -5,45 +5,38 @@
  */
 package jogorpg.personagens;
 
-import java.io.*;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 /**
  *
  * @author lele
  */
 public class Seer extends Personagem{
-private File seer_lines;
-    Scanner scanner;
-    
+ BufferedReader reader;
     public Seer(String nome) {
         this.setNome(nome);
-        seer_lines = new File("src/jogorpg/resources/Seer_Lines.txt");
-        scanner =null;
-        try{
-            scanner = new Scanner(seer_lines);
-            
-        }catch(FileNotFoundException e){
-            System.out.println("Cannot talk to "+this.getNome());
-        }
-    }
-
-     @Override
-    public void talk(){
-        try{
-        String line = scanner.nextLine();
-        
-        while(scanner.hasNext() && !line.equals("--XX--")){
-            System.out.println(line);
-            line = scanner.nextLine();
-            //if(!scanner.hasNext()){
-           // System.out.println("I cannot say anything else to you.");
-            //}
-        }    
-        }catch (NoSuchElementException e){
-             System.out.println("'I've told you all I can. Good luck.'");
-         }   
-                
+        reader = new BufferedReader(new InputStreamReader(Fairy.class.getResourceAsStream("/jogorpg/resources/Seer_Lines.txt")));
+       
     }
     
+    @Override
+    public void talk(){
+       // String line = null;  
+        try {
+            String line = reader.readLine();
+            while(!(line.equals("--XX--"))){
+                System.out.println(line);
+                line = reader.readLine();
+            }
+        } catch (IOException ex) {
+            System.out.println("'I don't want to talk with you.'");
+        } catch (NullPointerException n){
+           System.out.println("'I've told you all I know. Good Luck.'"); 
+        }
+
+    }
+ 
+ 
 }

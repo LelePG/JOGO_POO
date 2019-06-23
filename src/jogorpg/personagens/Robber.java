@@ -5,45 +5,36 @@
  */
 package jogorpg.personagens;
 
-import java.io.*;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 /**
  *
  * @author lele
  */
 public class Robber extends Personagem{
-private File robber_lines;
-    Scanner scanner;
-    
+    BufferedReader reader;
     public Robber(String nome) {
         this.setNome(nome);
-        robber_lines = new File("src/jogorpg/resources/Robber_Lines.txt");
-        scanner =null;
-        try{
-            scanner = new Scanner(robber_lines);
-            
-        }catch(FileNotFoundException e){
-             System.out.println("Cannot talk to "+this.getNome());
-
-        }
+        reader = new BufferedReader(new InputStreamReader(Fairy.class.getResourceAsStream("/jogorpg/resources/Robber_Lines.txt")));
+       
     }
-
-     @Override
+    
+    @Override
     public void talk(){
-        try{
-        String line = scanner.nextLine();
-        
-        while(scanner.hasNext() && !line.equals("--XX--")){
-            System.out.println(line);
-            line = scanner.nextLine();
-           // if(!scanner.hasNext()){
-            //System.out.println("You are lucky I'm caged. Otherwise...");
-            //}
-        }    
-        }catch (NoSuchElementException e){
-             System.out.println("'GO AWAY, KID!'");
-         }   
-                
+       // String line = null;  
+        try {
+            String line = reader.readLine();
+            while(!(line.equals("--XX--"))){
+                System.out.println(line);
+                line = reader.readLine();
+            }
+        } catch (IOException ex) {
+            System.out.println("'You are lucky I'm caged. Otherwise...'");
+        } catch (NullPointerException n){
+           System.out.println("'GO AWAY KID.'"); 
+        }
+
     }
 }
