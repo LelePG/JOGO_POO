@@ -7,6 +7,7 @@ package jogorpg.personagens;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import jogorpg.itens.*;
 import jogorpg.monsters.*;
 
@@ -122,6 +123,13 @@ public class Hero extends Fighting_Character{
         }
         
         return ret;
+    }
+    
+     public int sorte(int diceSides){
+        int roll=0;
+        Random rand = new Random();
+        roll = rand.nextInt(diceSides)+1;
+        return roll;
     }
     
 }

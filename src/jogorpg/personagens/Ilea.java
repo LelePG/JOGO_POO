@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Random;
 /**
  *
  * @author lele
@@ -36,5 +37,12 @@ public class Ilea extends Personagem {
            System.out.println("'We have to get out of here. Quickly!"); 
         }
 
+    }
+    
+     public int sorte(int diceSides){
+        int roll=0;
+        Random rand = new Random();
+        roll = rand.nextInt(diceSides)+1;
+        return roll;
     }
 }

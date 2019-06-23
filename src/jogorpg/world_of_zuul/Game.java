@@ -78,7 +78,7 @@ public class Game
         Food f1,f2,f3,f4;
         
         Potion h1,h2,h3,h4,h5,s1,s2,p1,p2,p3,p4,p5;
-        Personagem fairy,warrior,musician,seer,robber,statue,witch,ilea;
+        Personagem fairy,warrior,musician,seer,robber,statue,witch,ilea,king;
         // create the rooms
         cave_entrance = new Room("outside that weird cave Ilea likes so much. You hear someone crying for help. It seems to be Ilea.","Outside the Cave");
         inside_cave = new Room ("inside the cave. It's too dark, and you are now sure it's Ilea who's crying for help.\nThere's a hole in the ground, and you are sure that's where the cries are comming from.","The Cave");
@@ -96,7 +96,7 @@ public class Game
         castle_jail = new Room ("at the Castle's jail. You look for Ilea, but she's not here.", "Castle Jail");
         castle_garden = new Room("an the Castle's garden. You look around and... There she is! You found her. Ilea's playing in the bushes!","Castle Garden");
         castle_throne_room = new Room ("in a weird throne room. There's a weird man sitting on the throne looking very unfriendly...","Throne Room");
-        final_room = new Room("running through the passageway. The light is near, and you find yourselves in the forest, near the cave.\n Most important, near home.\n----THE END----","THE END");
+        final_room = new Room("running through the passageway. The light is near, and you find yourselves in the forest, near the cave entrance.\n Most important, near home.\n----THE END----","THE END");
         
         //creating monsters
         bat1 = new Bat("Bat1");
@@ -175,7 +175,7 @@ public class Game
         statue = new TalkingStatue("Statue");
         witch = new Witch("Witch");
         ilea = new Ilea("Ilea");
-        
+        king =  new KingOdrian("King_Odrian");
         // initialise room exits, monsters, characters and items
         cave_entrance.setExit("east",inside_cave);
         
@@ -283,9 +283,10 @@ public class Game
         castle_throne_room.setPessoa(ilea.getNome(), ilea);
 	castle_throne_room.setMonstro(bossscorpion.getNome(),bossscorpion);
 	castle_throne_room.setItem(h5.getNome(),h5);
+        castle_throne_room.setPessoa(king.getNome(), king);
         
         //currentRoom = cave_entrance;
-        currentRoom = jail;
+        currentRoom = castle_throne_room;
     }
 
     public void escreve(String escreve){
@@ -414,7 +415,7 @@ public class Game
             useItem(command);
         }
         else if(commandWord==CommandWord.TALK){
-            talkTo(command); 
+           wantToQuit= talkTo(command); 
         }
         else if(commandWord==CommandWord.EQUIP){
             equip(command);
@@ -604,24 +605,33 @@ public class Game
           
       }
       
-      private void talkTo(Command command) 
+      private boolean talkTo(Command command) 
     {
         if(!command.hasSecondWord()) {
             h.talk();
             System.out.println("Talk with someone? ");
-            return;
+            return false;
         }
         delay();
         String pessoa_nome = command.getSecondWord();
         
         Personagem Pessoa = currentRoom.getPessoa(pessoa_nome);
+        
+        if(Pessoa instanceof KingOdrian){
+            Pessoa.talk();
+            finalScene((KingOdrian) Pessoa,h,(Ilea)currentRoom.getPessoa("Ilea"));
+            currentRoom.emptyMonsters(currentRoom);
+            return true;
+        }
 
         if (Pessoa == null) {
             System.out.println("There is no one with this name here!");
-            return;
+            return false;
         }
         Pessoa.talk();
+        System.out.println("");
         escreve(h.getNome()+ " talked to " + Pessoa.getNome()+".");
+        return false;
     }
       
     private void equip(Command command){
@@ -712,7 +722,56 @@ public class Game
  
           
     }
-       
+      
+     public void finalScene(KingOdrian O,Hero h, Ilea i){
+         Scanner s = new Scanner(System.in);
+         String str;
+         System.out.println("\nDo you want to play the dice game? Y/N");
+         str = s.next();
+         if(str.equals("y")||str.equals("Y")){
+             if(O.diceGame(h,i)){//true eles ganham o jogo, false eles perdem
+                 System.out.println("'I'll let you leave then. You just have to pass trough the door'");
+                 escreve(h.getNome()+ " and Ilea played dices with King Odrian and won.");
+                 System.out.println("\nYou pass trough the door...");
+                 try {
+                TimeUnit.SECONDS.sleep((long) 6);//só pra garantir que vai printar o comando primeiro e depois a ação correspondente.
+                } catch (InterruptedException ex) {
+                  //não altera nada se não conseguir
+                }
+                 currentRoom = currentRoom.getExit("north");
+                 System.out.println("\nYou and Ilea are "+currentRoom.getShortDescription());
+                 escreve("----------------------------------");
+                escreve(h.getNome()+ " finished the game");
+             }
+             else{
+                System.out.println("'Both of you are mine now.'");
+                escreve(h.getNome()+ " and Ilea played dices with \nKing Odrian and lost.");
+                escreve("Both shall remain his prisioners til the \nend of their days.");
+                escreve("----------------------------------");
+                escreve("            Game over        ");
+                escreve("----------------------------------");
+                System.out.println("\n######################");
+                System.out.println("######GAME OVER#######");
+                System.out.println("######################");
+             }
+         }
+         else{
+             System.out.println("\n'You don't wanna play? Well it's a pity. I tried to give you a chance."
+                     + "\nI'm sorry for what I'm about to do... It's nothing personal.'");
+             h.died();
+             System.out.println("\nYou and Ilea were killed by King Odrian. "
+                     + "You just had to roll a dice.");
+              System.out.println("\n######################");
+              System.out.println("######GAME OVER#######");
+              System.out.println("######################");
+                
+             escreve("----------------------------------");
+             escreve(h.getNome() + " and Ilea are dead.");
+             escreve("They refused to play dices with\nKing Odrian and were killed. \nGame over.");
+             escreve("----------------------------------");
+         }
+         
+     }
 
   private void useItem(Command command){
         if(!command.hasSecondWord()) {
