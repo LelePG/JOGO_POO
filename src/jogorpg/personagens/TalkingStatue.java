@@ -17,7 +17,7 @@ public class TalkingStatue extends Personagem {
     Scanner scanner;
     public TalkingStatue(String nome) {
         this.setNome(nome);
-        Statue_Lines = new File("Statue_Lines.txt");
+        Statue_Lines = new File("src/jogorpg/resources/Statue_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(Statue_Lines);
@@ -40,7 +40,7 @@ public class TalkingStatue extends Personagem {
             //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("Pick all you need, and drop what you don't. The King made this room for it.");
+             System.out.println("'Pick all you need, and drop what you don't. The King made this room for it.'");
          }   
                 
     }

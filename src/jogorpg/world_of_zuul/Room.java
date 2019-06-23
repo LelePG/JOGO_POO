@@ -197,6 +197,22 @@ public class Room
      public boolean sairSala(){
          return monstros.isEmpty();
      }
+     
+     public void emptyMonsters(){
+         this.monstros.clear();
+     }
+     
+     public String[] monstroLabel(){
+        String[] ret;
+        int c=0;
+        ret = new String[monstros.size()];
+        for(Monster key: monstros.values()){
+            ret[c] = key.getNome();
+            c++;
+        }
+        
+        return ret;
+    }
     //END MONSTER RELATED
      
     //ITEM RELATED

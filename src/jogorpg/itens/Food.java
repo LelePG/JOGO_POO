@@ -29,7 +29,7 @@ public class Food extends Item{
 
     @Override
     public String getPrintLine() {
-        return this.getNome()+" restored some energy.";
+        return this.getNome()+" restored some of your energy.";
     }
     
 }

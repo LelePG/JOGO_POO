@@ -18,7 +18,7 @@ private File seer_lines;
     
     public Seer(String nome) {
         this.setNome(nome);
-        seer_lines = new File("Seer_Lines.txt");
+        seer_lines = new File("src/jogorpg/resources/Seer_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(seer_lines);
@@ -41,7 +41,7 @@ private File seer_lines;
             //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("I've told you all I can. Good luck.");
+             System.out.println("'I've told you all I can. Good luck.'");
          }   
                 
     }

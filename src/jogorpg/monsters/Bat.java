@@ -19,7 +19,7 @@ public class Bat extends Monster{
         this.setDefesa(4);
         this.setMax_energia(10);
         this.setEnergia(10);
-        this.setMoedas(2);
+        this.setMoedas(20);
     }
     @Override
     public String classe(){
@@ -34,7 +34,7 @@ public class Bat extends Monster{
         }
         else if(P.getDefesa()<=this.getAtaque()){
             P.decremento(this.getAtaque()+1);
-            this.decremento(1);
+            this.decremento(2);
          }
     }
 }

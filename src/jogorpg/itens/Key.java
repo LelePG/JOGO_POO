@@ -25,7 +25,7 @@ public class Key extends Item {
 
     @Override
     public String getPrintLine() {
-        return "Not supported yet";
+        return "The key was used.";
     }
 
     

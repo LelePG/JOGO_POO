@@ -15,14 +15,15 @@ import jogorpg.personagens.Personagem;
  * @author lele
  */
 public class BossScorpion extends BossMonster{
-   private Item i;
+   
     public BossScorpion(String nome){
         this.setNome(nome);
-        this.setAtaque(17);
+        this.setAtaque(20);
         this.setDefesa(16);
         this.setMax_energia(25);
         this.setEnergia(25);
-        i = new Attack_Weapon ("Sword of Raal",4,"A strong sword forged in the moutain of Raal",15,5,25);
+        this.insereItem( new Defense_Weapon ("Light_Shield",3,"a fragile-looking shield.",2,5,25));
+	this. insereItem(new Food("Scorpion_tail",15,30,"i'ts raw, but can still be eaten."));
     }
     @Override
     public void attack(Fighting_Character P) {

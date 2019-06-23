@@ -15,7 +15,6 @@ import jogorpg.personagens.*;
 public class BossSpider extends BossMonster{
     private String nome;
     private boolean poison;
-    private Item i;
     public BossSpider(String nome){
         this.setNome(nome);
         this.setAtaque(12);
@@ -23,7 +22,9 @@ public class BossSpider extends BossMonster{
         this.setMax_energia(20);
         this.setEnergia(20);
         this.poison = true;
-        i = new Key("Iron Key",3,"The key used to open the Iron Gate");
+        this.insereItem(new Key("Iron_Key",3,"The key used to open the Iron Gate"));
+        this.insereItem(new Food("Spider_Legs",3,10,"Raw Spider legs. They look nutritive."));
+        this.insereItem(new Defense_Weapon("Painted_Shield",7,"a colorful shield. It's heavy.",4,13,55));
     }
     
     @Override
@@ -41,6 +42,7 @@ public class BossSpider extends BossMonster{
     public String classe(){
         return "BOSS SPIDER";
     }
+    
     
     
     

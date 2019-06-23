@@ -24,7 +24,7 @@ public class Heal_Potion extends Potion {
 
     @Override
     public void use(Fighting_Character F) {
-       F.setEnergia(F.getEnergia()+4*this.getQualidade());
+       F.setEnergia(F.getEnergia()+3*this.getQualidade());
     }
 
     @Override

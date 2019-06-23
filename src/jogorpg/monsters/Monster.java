@@ -5,8 +5,10 @@
  */
 package jogorpg.monsters;
 
+import java.util.ArrayList;
 import jogorpg.itens.*;
 import jogorpg.personagens.*;
+import jogorpg.world_of_zuul.Room;
 
 /**
  *
@@ -19,13 +21,22 @@ public abstract class Monster {
     private float energia;
     private int max_energia;
     private boolean alive;
-    private Coins moedas;
-    
+    private ArrayList<Item> i;
     public Monster(){//Basically, a monster is just alive
         this.alive = true;
-        moedas = new Coins("Coins",1,"golden coins",0);
+        this.i = new ArrayList<Item>();
+        i.add(new Coins("Coins",1,"golden coins",0));
     }
 
+    public void insereItem(Item adiciona){
+        this.i.add(adiciona);
+    }
+    
+    public void dropAll(Room r){
+        for(int c=0;c<i.size();c++){
+            r.setItem(i.get(c).getNome(),i.get(c));
+        }
+    }
     //GETTERS
     public String getNome() {
         return nome;
@@ -52,7 +63,7 @@ public abstract class Monster {
     }
     
     public int getMoedas(){
-        return moedas.getCoinNumber();
+        return ((Coins) i.get(0)).getCoinNumber();
     }
     
     
@@ -83,14 +94,10 @@ public abstract class Monster {
           this.alive = false;
     }
     
-    public void setMoedas(int i){
-        moedas.setCoinNumber(i);
+    public void setMoedas(int n){
+        ((Coins) i.get(0)).setCoinNumber(n);
     }
-
-    public Item dropCoins(){
-        return this.moedas;
-    }
-    
+   
     public void decremento(float n){
         if(this.getEnergia()>0 && this.getEnergia()<=max_energia ){
             this.energia= this.energia - n;

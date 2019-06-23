@@ -5,6 +5,7 @@
  */
 package jogorpg.personagens;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import jogorpg.itens.*;
 import jogorpg.monsters.*;
@@ -41,7 +42,7 @@ public class Hero extends Fighting_Character{
     
     public boolean pickItem(Item i){
         if(i.getPeso()+this.pesoInventario()>this.getL_Peso()){
-            System.out.println("You can't carry this. It's too heavy for you.");
+           // System.out.println("You can't carry this. It's too heavy for you.");
             return false;
         }
         inventario.put(i.getNome(),i); 
@@ -141,6 +142,18 @@ public class Hero extends Fighting_Character{
     @Override
     public void talk() {
         System.out.println("I must find Ilea.");
+    }
+    
+    public String[] inventarioLabel(){
+        String[] ret;
+        int c=0;
+        ret = new String[inventario.size()];
+        for(Item key: inventario.values()){
+            ret[c] = key.getDescription();
+            c++;
+        }
+        
+        return ret;
     }
     
 }

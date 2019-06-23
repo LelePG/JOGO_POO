@@ -17,7 +17,7 @@ public class Musician extends Personagem{
     
     public Musician(String nome) {
         this.setNome(nome);
-        musician_lines = new File("Musician_Lines.txt");
+        musician_lines = new File("src/jogorpg/resources/Musician_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(musician_lines);
@@ -40,7 +40,7 @@ public class Musician extends Personagem{
            // }
         }    
         }catch (NoSuchElementException e){
-             System.out.println("I wish you good luck. I'll write a song about you if I ever get out of here");
+             System.out.println("'I wish you good luck. I'll write a song about you if I ever get out of here'");
          }   
                 
     }

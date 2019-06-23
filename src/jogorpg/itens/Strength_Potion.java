@@ -20,7 +20,7 @@ public class Strength_Potion extends Potion {
 
     @Override
     public void use(Fighting_Character F) {
-         F.setAtaque(F.getAtaque()*this.getQualidade());
+         F.setAtaque(F.getAtaque()*this.getQualidade()/2);
     }
 
     @Override

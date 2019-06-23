@@ -21,7 +21,7 @@ public class Warrior extends Personagem{
     
     public Warrior(String nome) {
         this.setNome(nome);
-        warrior_lines = new File("Warrior_Lines.txt");
+        warrior_lines = new File("src/jogorpg/resources/Warrior_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(warrior_lines);
@@ -44,7 +44,7 @@ public class Warrior extends Personagem{
             //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("Try to keep yourself alive. You won't be able to save your sister if you are dead!");
+             System.out.println("'Try to keep yourself alive. You won't be able to save your sister if you are dead!'");
          }   
                 
     }

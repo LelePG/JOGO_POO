@@ -7,6 +7,7 @@ package jogorpg.personagens;
 import java.io.*;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
 /**
  *
  * @author lele
@@ -16,7 +17,7 @@ public class Fairy extends Personagem{
     Scanner scanner;
     public Fairy(String nome) {
         this.setNome(nome);
-        Fairy_Lines = new File("Fairy_Lines.txt");
+        Fairy_Lines = new File("src/jogorpg/resources/Fairy_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(Fairy_Lines);
@@ -39,7 +40,7 @@ public class Fairy extends Personagem{
            // }
         }    
         }catch (NoSuchElementException e){
-             System.out.println("I've told you all I know. Go away now.");
+             System.out.println("'I've told you all I know. Go away now.'");
          }   
                 
     }

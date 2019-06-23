@@ -18,7 +18,7 @@ private File robber_lines;
     
     public Robber(String nome) {
         this.setNome(nome);
-        robber_lines = new File("Robber_Lines.txt");
+        robber_lines = new File("src/jogorpg/resources/Robber_Lines.txt");
         scanner =null;
         try{
             scanner = new Scanner(robber_lines);
@@ -42,7 +42,7 @@ private File robber_lines;
             //}
         }    
         }catch (NoSuchElementException e){
-             System.out.println("GO AWAY, KID!");
+             System.out.println("'GO AWAY, KID!'");
          }   
                 
     }
