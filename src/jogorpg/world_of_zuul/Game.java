@@ -283,8 +283,8 @@ public class Game {
         castle_throne_room.setItem(h5.getNome(), h5);
         castle_throne_room.setPessoa(king.getNome(), king);
 
-        //currentRoom = cave_entrance;
-        currentRoom = castle_corridor;
+        currentRoom = cave_entrance;
+        //currentRoom = gate;
     }
 
     public void escreve(String escreve) {//Função pra escrever no game_log. Não preciso ficar enchendo o código de try catch.
@@ -350,6 +350,8 @@ public class Game {
         System.out.println();
         System.out.println("Welcome to the World of Zuul! What's your name? ");
         h.setNome(s.nextLine());
+        System.out.println();
+        System.out.println();
         System.out.println(h.getNome() + ",it's been a long time since your sister went to explore that cave, right? ");
         System.out.println("It will be dark soon, and no one wants little Ilea outside in the dark.");
         System.out.println("You have to go after her, specially with the stories that are told about that cave...");
@@ -412,6 +414,8 @@ public class Game {
             h.displayInventory();
         } else if (commandWord == CommandWord.CHEAT) {
             cheat(command);
+        }else if (commandWord == CommandWord.STATUS) {
+            h.imprimirStatus();
         }
         // else command not recognised.
         return wantToQuit;
@@ -457,6 +461,16 @@ public class Game {
             System.out.println("There is no door!");
         } else {
             if (currentRoom.sairSala()) {//Sair sala me retorna se tenho monstros vivos, ou não.
+                if (currentRoom.getName().equals("Iron Gate") && direction.equals("east")) {//se eu estiver no gate e quiser ir pra east, preciso da chave
+                    Item aux = h.removerItem("Iron_Key");//verifica a chave no inventario do herói
+                    if (aux == null) {
+                        System.out.println("You need a key to open the gate.");
+                        return;
+                    } else {//depois que ele usa a chave, deixa ela pra trás. Não vai ser necessária mesmo.
+                        System.out.println("You used the Iron Key to open the gate.");
+                    }
+
+                }
                 currentRoom = nextRoom;
                 if (this.currentRoom.getName().equals("THE END")) {//quando eu chegar no final do jogo
                     escreve("----------------------------------");
@@ -464,6 +478,7 @@ public class Game {
                     System.out.println(currentRoom.getShortDescription());
                     return;
                 }
+                System.out.println();
                 System.out.println(currentRoom.getLongDescription());//entra no próximo room
                 escreve("----------------------------------");
                 escreve(h.getNome() + " entered " + currentRoom.getName() + ".");
@@ -788,6 +803,7 @@ public class Game {
             escreve("****A CHEAT WAS USED****");
         } else if (action.equals("killall")) {
             currentRoom.emptyMonsters(currentRoom);
+            System.out.println();
             System.out.println(currentRoom.getLongDescription());
             escreve("****A CHEAT WAS USED****");
         }

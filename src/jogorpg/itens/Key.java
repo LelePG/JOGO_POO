@@ -19,12 +19,12 @@ public class Key extends Item {
 
     @Override
     public void use(PersonagemQueLuta F) {
-        System.out.println("The key was used.");
+        System.out.println("You have to try to open something with the key.");
     }
 
     @Override
     public String getPrintLine() {
-        return "The key was used.";
+        return "You have to try to open something with the key.";
     }
 
 }
