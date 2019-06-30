@@ -21,9 +21,8 @@ public class BossSnake extends BossMonster{
         this.setDefesa(16);
         this.setMax_energia(25);
         this.setEnergia(25);
-        this.insereItem(new Defense_Weapon("Metal_Shield",10," a metal Shield.",4,23,35));
-	this. insereItem(new Attack_Weapon("Heavy_Spear",8,"a heavy spear.",20,10,35));
-       this. insereItem(new Food("Snake_tail",8,20,"i'ts raw, but can still be eaten."));
+	this.insereItem(new Attack_Weapon("Heavy_Spear",8,"a heavy spear.",20,10,35));
+       this.insereItem(new Food("Snake_tail",8,20,"i'ts raw, but can still be eaten."));
     }
     
     @Override

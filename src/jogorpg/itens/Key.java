@@ -20,7 +20,7 @@ public class Key extends Item {
 
     @Override
     public void use(Fighting_Character F) {
-        System.out.println("Not supported yet");
+        System.out.println("The key was used.");
     }
 
     @Override

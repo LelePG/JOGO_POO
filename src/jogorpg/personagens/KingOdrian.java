@@ -31,7 +31,7 @@ public void delay(int n){
         System.out.println("\n'Ilea, my dear. you want to leave me?\n What a pity. You have a talent, I can see it.\n"
                 + "Oh, little one... You don't know how sad it makes me. But if you want to leave me, you may.'");
 
-       //delay(7);
+       delay(7);
         
          System.out.println("\n'But only if you win me in a game. Don't be so foolish kid.\n"
                  + "Although you got here, you have no strengh to figth me. I could tear you both so pieces with a flick of my wrist.\n"
@@ -39,7 +39,7 @@ public void delay(int n){
                  + "A special girl like her, traines for a master like me could do wonders in just no time.\n"
                  + "It will be hard to find another one suitible for being my apprentice, but guess I'll have to keep trying...\n'");
          
-         //delay(6);
+         delay(8);
          System.out.println( "\n'Oh, of course. The game. It's a pretty simple one, actually. A dice roll.\n"
                  + "I'll roll one dice, and as I'm a good man I'll give both of you a dice too.\n"
                  + "All you have to do is guess which is the sum of all our dices.\n"
@@ -47,7 +47,7 @@ public void delay(int n){
                  + "I'll give you 5 guesses. If you get it rigth, you win and I let you go."
                  + "If you don't, both of you have to stay. Ilea will be my apprentice and you..."
                  + "\nI'm sure I'll find a job for you. What do you say? I could just kill you if you refuse, be aware while you think.'");
-        // delay(6);
+         delay(8);
     }
     
     public boolean diceGame(Hero h, Ilea i){
@@ -57,13 +57,18 @@ public void delay(int n){
         int dadoO = this.sorte(12);
         int sum = dadoH+dadoI+dadoO;
         int guess;
-        //System.out.println("I"+dadoI);
-        //System.out.println("H"+dadoH);
-        //System.out.println("O"+dadoO);
+        System.out.println("You rolled  " +dadoH+ " and Ilea rolled "+dadoI+".");
         System.out.println(sum);
         for(int c=0;c<5;c++){
             System.out.println("Guess a number: ");
-            guess = Integer.parseInt(s.next());
+            try{
+                guess = Integer.parseInt(s.next());
+            }
+            catch(NumberFormatException e){
+                System.out.println("This is not a number.");
+                return false;
+            }
+            
             if(sum==guess){
                 System.out.println("'The sum is "+Integer.toString(sum) + ". You won.'");
                 return true;

@@ -17,7 +17,7 @@ import jogorpg.monsters.*;
  * @author lele
  */
 public class Hero extends Fighting_Character{
-    private HashMap<String,Item> inventario;
+    
     private Coins moedas;
    
     
@@ -25,54 +25,13 @@ public class Hero extends Fighting_Character{
         super( ataque, defesa, energia,carregar);
         this.setMax_energia(35);
         moedas = new Coins("Coins1",1,"golden coins",100);
-        inventario = new HashMap<String,Item>();
+       
         this.pickItem(moedas);
   
     }
     
     
-    public boolean pickItem(Item i){
-        if(i.getPeso()+this.pesoInventario()>this.getL_Peso()){
-           // System.out.println("You can't carry this. It's too heavy for you.");
-            return false;
-        }
-        inventario.put(i.getNome(),i); 
-        return true;
-    }
     
-    
-    public Item removerItem(String nome){
-        Item aux;
-        if(inventario.containsKey(nome)){
-            aux = inventario.get(nome);
-            inventario.remove(nome);
-            return aux;
-        }
-        else{
-           //Trato isso na Game System.out.println("You do not have this item.");
-            return null;
-        }
-        
-    }
-    
-    public String getInventarioString(){
-        String ret = "Inventory: ";
-        if(inventario.isEmpty()){
-            return "Your inventory is empty. ";
-        }
-        for(String key: inventario.keySet()){
-            ret+=" "+key;
-        }
-        return ret;
-    }
-    
-    public int pesoInventario(){//for each que retorna o peso total do inventario
-        int peso = 0;
-        for(String keys: inventario.keySet()){
-            peso += inventario.get(keys).getPeso();
-        }
-        return peso;
-    }
 
     public void lutar(Monster M){
         M.attack(this);//A MECÂNICA DE ATAQUE PROPRIAMENTE TÁ RELACIONADA AO MONSTRO, E NÃO AO PERSONAGEM
@@ -97,33 +56,11 @@ public class Hero extends Fighting_Character{
       }  
     
     
-    
-    public void displayInventory(){
-        if(inventario.isEmpty()){
-            System.out.println("Your inventory is empty.");
-            return;
-        }
-        inventario.forEach((k,v)->{
-        System.out.println(v.getDescription()); });
-       
-        
-    }
     @Override
     public void talk() {
         System.out.println("I must find Ilea.");
     }
     
-    public String[] inventarioLabel(){
-        String[] ret;
-        int c=0;
-        ret = new String[inventario.size()];
-        for(Item key: inventario.values()){
-            ret[c] = key.getDescription();
-            c++;
-        }
-        
-        return ret;
-    }
     
      public int sorte(int diceSides){
         int roll=0;

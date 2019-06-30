@@ -78,7 +78,7 @@ public class Game
         Food f1,f2,f3,f4;
         
         Potion h1,h2,h3,h4,h5,s1,s2,p1,p2,p3,p4,p5;
-        Personagem fairy,warrior,musician,seer,robber,statue,witch,ilea,king;
+        Personagem fairy,warrior,musician,seer,robber,statue,witch,ilea,king,trader;
         // create the rooms
         cave_entrance = new Room("outside that weird cave Ilea likes so much. You hear someone crying for help. It seems to be Ilea.","Outside the Cave");
         inside_cave = new Room ("inside the cave. It's too dark, and you are now sure it's Ilea who's crying for help.\nThere's a hole in the ground, and you are sure that's where the cries are comming from.","The Cave");
@@ -176,6 +176,7 @@ public class Game
         witch = new Witch("Witch");
         ilea = new Ilea("Ilea");
         king =  new KingOdrian("King_Odrian");
+        trader = new Trader(100,h);
         // initialise room exits, monsters, characters and items
         cave_entrance.setExit("east",inside_cave);
         
@@ -262,6 +263,7 @@ public class Game
         boss1_room.setMonstro(bossspider.getNome(),bossspider);
         
         castle_corridor.setExit("east",castle_entrance);
+        castle_corridor.setPessoa(trader.getNome(), trader);
         
         castle_entrance.setExit("west",castle_corridor);
         castle_entrance.setExit("north",castle_jail);
@@ -286,7 +288,7 @@ public class Game
         castle_throne_room.setPessoa(king.getNome(), king);
         
         //currentRoom = cave_entrance;
-        currentRoom = castle_throne_room;
+        currentRoom = castle_corridor;
     }
 
     public void escreve(String escreve){
@@ -719,7 +721,6 @@ public class Game
         System.out.println(h.getNome()+"'s attributes were decreased.");
         
         escreve(print_file);
- 
           
     }
       
@@ -788,6 +789,7 @@ public class Game
             System.out.println(h.getInventarioString());
             return;
         }
+      
         i.use(h);//o item i é usado por h
         if(!i.getDestroy()){
             h.pickItem(i);//se o item não tiver que ser destruido, inserir ele novamente no iventario do herói
