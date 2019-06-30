@@ -5,15 +5,15 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
-public class Bat extends Monster{
- public Bat(String nome){
+public class Bat extends Monster {
+
+    public Bat(String nome) {
         this.setNome(nome);
         this.setAtaque(5);
         this.setDefesa(4);
@@ -21,20 +21,20 @@ public class Bat extends Monster{
         this.setEnergia(10);
         this.setMoedas(20);
     }
+
     @Override
-    public String classe(){
+    public String classe() {
         return "BAT";
     }
 
     @Override
-    public void attack(Fighting_Character P) {
-        if(P.getDefesa()>this.getAtaque()){
-            P.decremento(this.getAtaque()/2);
-            this.decremento(P.getAtaque()/3);
-        }
-        else if(P.getDefesa()<=this.getAtaque()){
-            P.decremento(this.getAtaque()+1);
+    public void attack(PersonagemQueLuta P) {
+        if (P.getDefesa() > this.getAtaque()) {
+            P.decremento(this.getAtaque() / 2);
+            this.decremento(P.getAtaque() / 3);
+        } else if (P.getDefesa() <= this.getAtaque()) {
+            P.decremento(this.getAtaque() + 1);
             this.decremento(2);
-         }
+        }
     }
 }

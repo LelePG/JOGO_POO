@@ -5,32 +5,26 @@
  */
 package jogorpg.monsters;
 
-import java.util.ArrayList;
-import jogorpg.itens.Item;
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.world_of_zuul.Room;
-
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
 public abstract class BossMonster extends Monster {
-   
-    public BossMonster(){
+
+    public BossMonster() {
         this.setMoedas(800);
     }
-    
-    
+
     @Override
     public String classe() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public void attack(Fighting_Character P) {
+    public void attack(PersonagemQueLuta P) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+
 }

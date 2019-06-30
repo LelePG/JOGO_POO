@@ -10,44 +10,42 @@ package jogorpg.personagens;
  * @author lele
  */
 public abstract class Personagem {
+
     private String nome;
     private boolean alive;
     private boolean poison;
 
     public Personagem() {
-        this.alive = true; 
+        this.alive = true;
         this.poison = false;
     }
 
-    
     //GETTERS
-    public String getNome(){
+    public String getNome() {
         return this.nome;
     }
-    
-    public boolean isPoisoned(){
+
+    public boolean isPoisoned() {
         return this.poison;
     }
-    
-    public boolean isAlive(){
+
+    public boolean isAlive() {
         return this.alive;
     }
     //SETTERS
-    
-    public void setNome(String n){
+
+    public void setNome(String n) {
         this.nome = n;
     }
 
-    
-    public void setPoison(boolean p){
+    public void setPoison(boolean p) {
         poison = p;
     }
-    
-    public void died(){
+
+    public void died() {
         this.alive = false;
     }
-      
-   public abstract void talk();
 
-      
+    public abstract void talk();
+
 }

@@ -6,37 +6,36 @@
 package jogorpg.personagens;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
 /**
  *
  * @author lele
  */
 public class TalkingStatue extends Personagem {
+
     BufferedReader reader;
-    
+
     public TalkingStatue(String nome) {
         this.setNome(nome);
         reader = new BufferedReader(new InputStreamReader(Fairy.class.getResourceAsStream("/jogorpg/resources/Statue_Lines.txt")));
-       
+
     }
-    
+
     @Override
-    public void talk(){
-       // String line = null;  
+    public void talk() {
+        // String line = null;  
         try {
             String line = reader.readLine();
-            while(!(line.equals("--XX--"))){
+            while (!(line.equals("--XX--"))) {
                 System.out.println(line);
                 line = reader.readLine();
             }
-        } catch (IOException ex) {
+        } catch (IOException | NullPointerException ex) {
             System.out.println("'Pick all you need, and drop what you don't. The King made this room for it.'");
-        } catch (NullPointerException n){
-           System.out.println("'Pick all you need, and drop what you don't. The King made this room for it.'"); 
         }
 
     }
-    
+
 }

@@ -5,17 +5,15 @@
  */
 package jogorpg.monsters;
 
-
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
-public class Rat extends Monster{
-    
-    public Rat(String nome){
+public class Rat extends Monster {
+
+    public Rat(String nome) {
         this.setNome(nome);
         this.setAtaque(3);
         this.setDefesa(3);
@@ -25,14 +23,14 @@ public class Rat extends Monster{
     }
 
     @Override
-    public void attack(Fighting_Character P) {
+    public void attack(PersonagemQueLuta P) {
         P.decremento(this.getAtaque());
-        this.decremento(P.getAtaque()/2);
+        this.decremento(P.getAtaque() / 2);
     }
 
     @Override
     public String classe() {
         return "RAT";
     }
-    
+
 }

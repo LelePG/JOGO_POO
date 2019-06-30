@@ -5,17 +5,16 @@
  */
 package jogorpg.itens;
 
-import jogorpg.personagens.Fighting_Character;
-
-
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
-public class Food extends Item{
-    private int give_energy;
-    
+public class Food extends Item {
+
+    private final int give_energy;
+
     public Food(String nome, int peso, int give_energy, String description) {
         super(nome, peso, description);
         this.give_energy = give_energy;
@@ -23,13 +22,13 @@ public class Food extends Item{
     }
 
     @Override
-    public void use(Fighting_Character F) {
-        F.setEnergia(F.getEnergia()+this.give_energy);
+    public void use(PersonagemQueLuta F) {
+        F.setEnergia(F.getEnergia() + this.give_energy);
     }
 
     @Override
     public String getPrintLine() {
-        return this.getNome()+" restored some of your energy.";
+        return this.getNome() + " restored some of your energy.";
     }
-    
+
 }

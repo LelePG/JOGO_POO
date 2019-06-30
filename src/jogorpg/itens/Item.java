@@ -12,42 +12,46 @@ import jogorpg.personagens.*;
  * @author lele
  */
 public abstract class Item {
-    private int peso;
-    private String nome;
-    private String description;
+
+    private final int peso;
+    private final String nome;
+    private final String description;
     private boolean destroy;//se o item precisa ser destruido depois do uso.
-/**
- * 
- * @param nome Item's name
- * @param peso Item's weitgh
- */    
-    public Item(String nome,int peso, String description){
+
+    /**
+     *
+     * @param nome Item's name
+     * @param peso Item's weitgh
+     */
+    public Item(String nome, int peso, String description) {
         this.nome = nome;
         this.peso = peso;
         this.description = description;
     }
-    
+
     //GETTERS
-    public int getPeso(){
+    public int getPeso() {
         return this.peso;
     }
-    
-    public String getNome(){
+
+    public String getNome() {
         return this.nome;
     }
-    
-    public boolean getDestroy(){
+
+    public boolean getDestroy() {
         return this.destroy;
     }
+
     //setter
-    public void setDestroy(boolean d){
+    public void setDestroy(boolean d) {
         this.destroy = d;
     }
-   
-    public String getDescription(){
-        return this.getNome() +": "+this.description;
+
+    public String getDescription() {
+        return this.getNome() + ": " + this.description;
     }
-    
-     public abstract void use(Fighting_Character F);
-     public abstract String getPrintLine();
+
+    public abstract void use(PersonagemQueLuta F);
+
+    public abstract String getPrintLine();
 }

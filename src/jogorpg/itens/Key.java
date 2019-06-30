@@ -5,21 +5,20 @@
  */
 package jogorpg.itens;
 
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
 public class Key extends Item {
-    
+
     public Key(String nome, int peso, String descrip) {
-        super(nome, peso,descrip);
+        super(nome, peso, descrip);
     }
 
     @Override
-    public void use(Fighting_Character F) {
+    public void use(PersonagemQueLuta F) {
         System.out.println("The key was used.");
     }
 
@@ -28,5 +27,4 @@ public class Key extends Item {
         return "The key was used.";
     }
 
-    
 }

@@ -5,46 +5,39 @@
  */
 package jogorpg.monsters;
 
-
 import jogorpg.itens.*;
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
-
+import jogorpg.personagens.PersonagemQueLuta;
 /**
  *
  * @author lele
  */
-public class BossScorpion extends BossMonster{
-   
-    public BossScorpion(String nome){
+public class BossScorpion extends BossMonster {
+
+    public BossScorpion(String nome) {
         this.setNome(nome);
         this.setAtaque(20);
         this.setDefesa(16);
         this.setMax_energia(30);
         this.setEnergia(30);
-        this.insereItem( new Defense_Weapon ("Light_Shield",3,"a fragile-looking shield.",2,5,25));
-	this. insereItem(new Food("Scorpion_tail",15,30,"i'ts raw, but can still be eaten."));
+        this.insereItem(new DefenseWeapon("Light_Shield", 3, "a fragile-looking shield.", 2, 5, 25));
+        this.insereItem(new Food("Scorpion_tail", 15, 30, "i'ts raw, but can still be eaten."));
     }
+
     @Override
-    public void attack(Fighting_Character P) {
-        if(P.getDefesa()<this.getAtaque()/2){
-            P.decremento(this.getAtaque()/2);
-            this.decremento(P.getAtaque()/3);
+    public void attack(PersonagemQueLuta P) {
+        if (P.getDefesa() < this.getAtaque() / 2) {
+            P.decremento(this.getAtaque() / 2);
+            this.decremento(P.getAtaque() / 3);
+        } else if (P.getDefesa() >= this.getAtaque() / 2) {
+            P.decremento(this.getAtaque() / 3 - P.getDefesa() / 2);
+            this.decremento(P.getAtaque() / 3);
         }
-        else if(P.getDefesa()>=this.getAtaque()/2){
-            P.decremento(this.getAtaque()/3-P.getDefesa()/2);
-            this.decremento(P.getAtaque()/3);
-        }
-      
+
     }
-    
+
     @Override
-    public String classe(){
+    public String classe() {
         return "BOSS SCORPION";
     }
-        
-   
-    
-    
-    
+
 }

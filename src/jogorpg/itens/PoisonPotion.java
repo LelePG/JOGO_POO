@@ -5,27 +5,26 @@
  */
 package jogorpg.itens;
 
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
-public class Poison_Potion extends Potion{
-  
-    public Poison_Potion(String nome, int peso, String description, int qualidade) {
+public class PoisonPotion extends Potion {
+
+    public PoisonPotion(String nome, int peso, String description, int qualidade) {
         super(nome, peso, description, qualidade);
     }
 
-   @Override
+    @Override
     public String getPotionType() {
         return "Antidote";
     }
 
     @Override
-    public void use(Fighting_Character F) {
-        if(F.isPoisoned() && this.getQualidade()>=0){
+    public void use(PersonagemQueLuta F) {
+        if (F.isPoisoned() && this.getQualidade() >= 0) {
             F.setPoison(false);
         }
     }
@@ -34,5 +33,5 @@ public class Poison_Potion extends Potion{
     public String getPrintLine() {
         return "was cured from poison.";
     }
-    
+
 }

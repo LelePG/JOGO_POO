@@ -5,43 +5,51 @@
  */
 package jogorpg.itens;
 
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
+
 
 /**
  *
  * @author lele
  */
-public abstract class Weapon extends Item{
-    private int damage;
-    private int defence;
+public abstract class Weapon extends Item {
+
+    private final int damage;
+    private final int defence;
     private int durabilidade;
-    
-    public Weapon(String nome, int peso,String description,int damage, int defence, int durabilidade){
-        super(nome, peso,description);
+
+    public Weapon(String nome, int peso, String description, int damage, int defence, int durabilidade) {
+        super(nome, peso, description);
         this.damage = damage;
         this.defence = defence;
         this.durabilidade = durabilidade;
     }
-    public int getDamage(){
+
+    public int getDamage() {
         return this.damage;
     }
-    public int getDefense(){
+
+    public int getDefense() {
         return this.defence;
     }
-    public int getDurabilidade(){
+
+    public int getDurabilidade() {
         return this.durabilidade;
     }
-    public void setDurabilidade(int d){
+
+    public void setDurabilidade(int d) {
         int max_durab = 30;
-        if(d>max_durab){
+        if (d > max_durab) {
             this.durabilidade = max_durab;
             return;
         }
         this.durabilidade = d;
     }
 
+    @Override
     public abstract String getPrintLine();
-    public abstract void use(Fighting_Character F);
-   
+
+    @Override
+    public abstract void use(PersonagemQueLuta F);
+
 }

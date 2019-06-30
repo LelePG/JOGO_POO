@@ -5,49 +5,49 @@
  */
 package jogorpg.monsters;
 
-import jogorpg.personagens.Fighting_Character;
-import jogorpg.personagens.Personagem;
+import jogorpg.personagens.PersonagemQueLuta;
 
 /**
  *
  * @author lele
  */
-public class Spider extends Monster{
-    private boolean poison;
-    public Spider(String nome,boolean p){
+public class Spider extends Monster {
+
+    private final boolean poison;
+
+    public Spider(String nome, boolean p) {
         this.setNome(nome);
         this.setMax_energia(13);
         this.setEnergia(13);
         this.poison = p;
         this.setMoedas(100);
-        if(this.poison){
+        if (this.poison) {
             this.setAtaque(7);
             this.setDefesa(4);
-        }
-        else{
+        } else {
             this.setAtaque(5);
             this.setDefesa(5);
         }
-        
-        
+
     }
+
     @Override
-    public void attack(Fighting_Character P) {
-        if(P.getDefesa()>this.getAtaque()){
+    public void attack(PersonagemQueLuta P) {
+        if (P.getDefesa() > this.getAtaque()) {
             P.decremento(this.getAtaque());
-            this.decremento(this.getDefesa()/2);
+            this.decremento(this.getDefesa() / 2);
+        } else if (P.getDefesa() <= this.getAtaque()) {
+            P.decremento(this.getAtaque() / 3);
+            this.decremento(P.getAtaque() / this.getAtaque());
         }
-        else if(P.getDefesa()<=this.getAtaque()){
-            P.decremento(this.getAtaque()/3);
-            this.decremento(P.getAtaque()/this.getAtaque());
-        }
-        if(this.poison && this.getEnergia()<5 && !P.isPoisoned()){
+        if (this.poison && this.getEnergia() < 5 && !P.isPoisoned()) {
             P.setPoison(true);
             System.out.println("YOU ARE POISONED");
         }
     }
+
     @Override
-    public String classe(){
+    public String classe() {
         return "SPIDER";
     }
 }
