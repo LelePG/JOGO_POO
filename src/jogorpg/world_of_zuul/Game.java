@@ -414,6 +414,8 @@ public class Game {
             h.displayInventory();
         } else if (commandWord == CommandWord.CHEAT) {
             cheat(command);
+        } else if (commandWord == CommandWord.ROOM){
+            System.out.println(currentRoom.getLongDescription());
         }else if (commandWord == CommandWord.STATUS) {
             h.imprimirStatus();
         }

@@ -129,7 +129,11 @@ public abstract class PersonagemQueLuta extends PersonagemComInventario {
         System.out.println("# Energy: " + this.getEnergia());
         System.out.println("# Attack: " + this.ataque);
         System.out.println("# Defence: " + this.getDefesa());
-
+        System.out.print("# Attack Weapon: ");
+        System.out.println((null==this.Attack_Weapon)?"-":this.Attack_Weapon.getNome());
+        System.out.print("# Defense Weapon: ");
+        System.out.println((null==this.Shield)?"-":this.Shield.getNome());
+        System.out.println("# Inventory: "+this.pesoInventario()+"/"+this.getL_Peso());
     }
 
     @Override
