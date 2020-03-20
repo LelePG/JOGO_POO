@@ -1,6 +1,7 @@
 # Bem vindo ao Jogo
-	Sua irmã Ilea gosta de brincar nas cavernas perto de casa, porém já está tarde e ela ainda não voltou. Como bom irmão mais velho, é seu dever ir procurá-la, mas saida que concluir essa tarefa não é tão simples quanto parece.
-	O jogo se baseia em linha de texto, com comandos pré-definidos.
+
+Sua irmã Ilea gosta de brincar nas cavernas perto de casa, porém já está tarde e ela ainda não voltou. Como bom irmão mais velho, é seu dever ir procurá-la, mas saiba que concluir essa tarefa não é tão simples quanto parece.
+O jogo se baseia em linha de texto, com comandos pré-definidos.
 ### Suas palavras chave são :
 * *help* -> Mostra suas palavras de comando e a descrição da sala atual;
 * *go*-> permite que você vá para a próxima sala, se não existirem monstros vivos na sala atual;
@@ -16,7 +17,10 @@
 * *room* -> mostra a descrição da sala atual;
 * *quit*-> termina o jogo.
 ### Execução
-	Para executar, é preciso rodar o comando `java -jar JogoRPG.jar` no terminal. O jogo pode ser terminado a qualquer momento usando o comando quit. 
-	Ao término do jogo (você foi morto, deu quit ou chegou ao final) é possível exibir um Game_Log com todas as ações perfomadas no jogo. O menu aparecerá e você só precisa informar se quer ou não que o mesmo seja aberto. Mesmo que escolha não abrir o arquivo, o mesmo ainda estará disponível no diretório do executável. Porém, o mesmo é sobreescrito a cada partida, então o Game_Log referenciará a última partida jogada. 
-	Lembrando que o jogo acabou sendo desenvolvido em inglês. Bom jogo.
+Para executar, é preciso rodar o comando `java -jar JogoRPG.jar` no terminal. O jogo pode ser terminado a qualquer momento usando o comando quit. 
+
+Ao término do jogo (você foi morto, deu quit ou chegou ao final) é possível exibir um Game_Log com todas as ações perfomadas no jogo. 
+O menu aparecerá e você só precisa informar se quer ou não que o mesmo seja aberto. Mesmo que escolha não abrir o arquivo, o mesmo ainda estará disponível no diretório do executável, porém, o mesmo é sobreescrito a cada partida, então o Game_Log referenciará a última partida jogada. 
+
+Lembrando que o jogo acabou sendo desenvolvido em inglês. Bom jogo.
 
